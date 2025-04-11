@@ -8,14 +8,18 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function index() {
-        return [
-            'id' => 1,
-            'name' => 'John Doe'
-        ];
+
+        $users = User::all();
+        return view('users.index', [
+            'greeting' => 'Usuários',
+            'users' => $users
+        ]);
     }
 
     public function show(User $user) {
-        return $user;
+        return view('users.show', [
+            'user' => $user
+        ]);
     }
 
 }
