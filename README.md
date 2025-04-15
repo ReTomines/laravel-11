@@ -101,6 +101,16 @@ git remote add origin https://github.com/IDdaSuaConta/nomeRepositoro.git
 git push -u origin main #Enviar as alterações do reositório local para o repositório remoto
 git log #Exibe todo o histórico de mudandas
 ```
+___________________________________________
+
+## Iniciando um repositório no Git e conectando ao repositório do Github
+
+```sh
+git rev-list --max-parents=0 main #Retorna o hash do 1º commit da branch main
+git checkout -b versao-inicial 9fceb02f0b1c2c1ef4d54ab13f7b1e7c7d81f29b #Crie uma nova branch a partir desse commit
+git push -u origin versao-inicial #Subir a nova branch para o GitHub
+```
+
 ............................................................................................
 ## Comandos úteis Docker/Laravel
 
