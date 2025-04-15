@@ -103,7 +103,7 @@ git log #Exibe todo o histórico de mudandas
 ```
 ___________________________________________
 
-## Iniciando um repositório no Git e conectando ao repositório do Github
+## Criando uma nova branch a partir do primeiro commit (da main)
 
 ```sh
 git rev-list --max-parents=0 main #Retorna o hash do 1º commit da branch main
