@@ -4,12 +4,13 @@
 
 
 ## Passo a passo para rodar o projeto
-Clone o projeto
+Clone o projeto (por branch)
 ```sh
-git clone https://github.com/especializati/curso-laravel-11 laravel-11
+git clone --branch <nome_branch> https://github.com/especializati/curso-laravel-11.git --single-branch <nome_pasta_raiz>
 ```
+Entrar na pasta criada
 ```sh
-cd laravel-11/
+cd <nome_pasta_raiz>
 ```
 
 
@@ -18,8 +19,7 @@ Crie o Arquivo .env
 cp .env.example .env
 ```
 
-
-Atualize essas variáveis de ambiente no arquivo .env
+*Atualize essas variáveis de ambiente no arquivo .env*
 ```dosini
 APP_NAME="Especializa Ti"
 APP_URL=http://localhost:8989
@@ -39,7 +39,6 @@ REDIS_HOST=redis
 REDIS_PASSWORD=null
 REDIS_PORT=6379
 ```
-
 
 Suba os containers do projeto
 ```sh
@@ -62,6 +61,10 @@ composer install
 Gere a key do projeto Laravel
 ```sh
 php artisan key:generate
+```
+Executar as migrations
+```sh
+php artisan migrate
 ```
 
 ............................................................................................
