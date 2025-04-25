@@ -69,7 +69,6 @@ php artisan key:generate
 
 Criar uma conta e um repositório no [github](https://github.com/)
 
-
 Executar os comando de configuração antes do 1º commit 
 ```sh
 git config --global user.email "suaContaDoGithub@gmail.com"      
@@ -99,6 +98,26 @@ Criar link com repositório remoto
 git remote add origin https://github.com/IDdaSuaConta/nomeRepositoro.git 
 git push -u origin main #Enviar as alterações do reositório local para o repositório remoto
 git log #Exibe todo o histórico de mudandas
+```
+_________________________________________________________________
+## Criando uma nova branch a partir do primeiro commit (da main)
+
+```sh
+git rev-list --max-parents=0 main #Retorna o hash do 1º commit da branch main
+git checkout -b versao-inicial 9fceb02f0b1c2c1ef4d54ab13f7b1e7c7d81f29b #Crie uma nova branch a partir desse commit
+git push -u origin versao-inicial #Subir a nova branch para o GitHub
+```
+
+### Verificar branches
+```sh
+git branch -a #Ver todas as branches (locais + remotas)
+git branch    #Verificar branche atual
+
+```
+
+### Trocar de branches
+```sh
+git switch nome-da-branch
 ```
 ............................................................................................
 ## Comandos úteis Docker/Laravel
