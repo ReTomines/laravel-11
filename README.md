@@ -114,7 +114,7 @@ git push -u origin versao-inicial #Subir a nova branch para o GitHub
 ### Verificar branches
 ```sh
 git branch -a #Ver todas as branches (locais + remotas)
-git branch   #Verificar branche atual
+git branch    #Verificar branche atual
 
 ```
 

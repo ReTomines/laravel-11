@@ -1,10 +1,14 @@
 ﻿@extends('layouts.default')
 
+@section('page-title', 'Dashboard')
+@php
+  $breadcrumbs = [
+    ['label' => 'Home', 'route' => ''],
+  ];
+@endphp
+
 @section('content')
-    <!--begin::App Content-->
-    <div class="app-content">
-          <!--begin::Container-->
-          <div class="container-fluid">
+
             <!--begin::Row-->
             <div class="row">
               <!--begin::Col-->
@@ -129,6 +133,7 @@
               <!--end::Col-->
             </div>
             <!--end::Row-->
+
             <!--begin::Row-->
             <div class="row">
               <!-- Start col -->
@@ -416,8 +421,5 @@
               <!-- /.Start col -->
             </div>
             <!-- /.row (main row) -->
-        </div>
-        <!--end::Container-->            
-    </div>
-    <!--end::App Content-->
+
 @endsection
