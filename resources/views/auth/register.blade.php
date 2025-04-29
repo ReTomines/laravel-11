@@ -15,23 +15,42 @@
           @csrf
 
             <div class="input-group mb-3">
-              <input type="text" name="name" class="form-control small-placeholder" placeholder="Nome" />
               <div class="input-group-text"><span class="bi bi-person"></span></div>
+              <input type="text" 
+                     name="name" 
+                     class="form-control small-placeholder @error('name') is-invalid @enderror" placeholder="Nome" value="{{ old('name') }}"/>
+              @error('name')
+                  <div class="invalid-feedback">{{ $message }}</div>
+              @enderror
             </div>
 
             <div class="input-group mb-3">
-              <input type="email" name="email" class="form-control small-placeholder" placeholder="Email" />
               <div class="input-group-text"><span class="bi bi-envelope"></span></div>
+              <input type="email" 
+                     name="email" 
+                     class="form-control small-placeholder @error('email') is-invalid @enderror" placeholder="Email" value="{{ old('email') }}"/>
+              @error('email')
+                  <div class="invalid-feedback">{{ $message }}</div>
+              @enderror
             </div>
 
             <div class="input-group mb-3">
-              <input type="password" name="password" class="form-control small-placeholder" placeholder="Senha" />
               <div class="input-group-text"><span class="bi bi-lock-fill"></span></div>
+              <input type="password" 
+                     name="password" 
+                     class="form-control small-placeholder @error('password') is-invalid @enderror" 
+                     placeholder="Senha"/>
+              @error('password')
+                  <div class="invalid-feedback">{{ $message }}</div>
+              @enderror
             </div>
 
             <div class="input-group mb-3">
-              <input type="password" name="password_confirmation" class="form-control small-placeholder" placeholder="Cofirmar Senha" />
               <div class="input-group-text"><span class="bi bi-lock-fill"></span></div>
+              <input type="password" 
+                     name="password_confirmation" 
+                     class="form-control small-placeholder" 
+                     placeholder="Cofirmar Senha" />
             </div>
             
             <div class="d-grid gap-2">
@@ -48,4 +67,4 @@
       </div>
     </div>
     <!-- /.register-box -->
-@endsection
+@endsection 

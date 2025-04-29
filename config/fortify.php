@@ -99,7 +99,7 @@ return [
     | e o usuário estiver autenticado. Você pode alterar esse valor livremente.
     */
 
-    'home' => '/home',
+    'home' => '/',
 
     /*
     |--------------------------------------------------------------------------
