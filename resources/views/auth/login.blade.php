@@ -51,9 +51,9 @@
             <!--end::Row-->
           </form>
             <div class="text-center small">
-                <p class="mb-1"><a href="forgot-password.html">Esqueci minha senha</a></p>
+                <p class="mb-1"><a href="{{route('password.email')}}">Esqueci minha senha</a></p>
                 <p class="mb-0">
-                    <a href="register.html" class="text-center"> Cadastre-se </a>
+                    <a href="{{route('register')}}" class="text-center"> Cadastre-se </a>
                 </p>
             </div>
         </div>

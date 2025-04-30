@@ -60,7 +60,7 @@
           </form>
 
           <p class="mb-0 text-center small"><br>
-            <a href="login.html" class="text-center"> Já sou cadastrado </a>
+            <a href="{{route('login')}}" class="text-center"> Já sou cadastrado </a>
           </p>
         </div>
         <!-- /.register-card-body -->
