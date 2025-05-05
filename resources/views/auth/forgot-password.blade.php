@@ -5,7 +5,7 @@
 @section('content')
     <div class="login-box">
       <div class="login-logo">
-        <a href="../index2.html"><b>video</b>Wall</a>
+        <a href="{{ route('login')}}"><b>video</b>Wall</a>
       </div>
       
       <!-- /.login-logo -->

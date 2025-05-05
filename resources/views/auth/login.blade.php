@@ -6,12 +6,12 @@
     <div class="login-box">
 
       <div class="login-logo">
-        <a href="../index2.html"><b>video</b>Wall</a>
+        <a href="{{ route('login')}}"><b>video</b>Wall</a>
       </div>
       <!-- /.login-logo -->
       <div class="card">
         <div class="card-body login-card-body">
-          <p class="login-box-msg fw-semibold"> Faça Login</p>
+          <p class="login-box-msg fw-semibold">Login</p>
           <form action="{{route('login')}}" method="post">
             @csrf
             <div class="input-group mb-3">

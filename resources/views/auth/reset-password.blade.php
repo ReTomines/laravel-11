@@ -5,7 +5,7 @@
 @section('content')
     <div class="register-box">
       <div class="register-logo">
-        <a href="../index2.html"><b>video</b>Wall</a>
+        <a href="{{ route('login')}}"><b>video</b>Wall</a>
       </div>
       <!-- /.register-logo -->
       <div class="card">
