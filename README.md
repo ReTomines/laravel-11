@@ -6,11 +6,11 @@
 ## Passo a passo para rodar o projeto
 Clone o projeto (por branch)
 ```sh
-git clone --branch <nome_branch> https://github.com/especializati/curso-laravel-11.git --single-branch <nome_pasta_raiz>
+git clone -b modelo-inicial https://github.com/especializati/curso-laravel-11.git --single-branch laravel-11
 ```
 Entrar na pasta criada
 ```sh
-cd <nome_pasta_raiz>
+cd laravel-11
 ```
 
 
