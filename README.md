@@ -6,7 +6,7 @@
 ## Passo a passo para rodar o projeto
 Clone o projeto
 ```sh
-git clone -b modelo-inicial https://github.com/especializati/curso-laravel-11.git --single-branch laravel-11
+git clone -b modelo-inicial https://github.com/especializati/curso-laravel-11.git laravel-11
 ```
 ```sh
 cd laravel-11
