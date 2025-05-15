@@ -3,7 +3,7 @@
         @csrf
         @method('PUT') 
         <div class="card-header">
-            <div>Dados Básicos</div>
+            <div><b>Dados Básicos</b></div>
         </div>
         <div class="card-body">
 

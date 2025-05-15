@@ -1,27 +1,27 @@
 ﻿<div class="card small">
-    <form action="{{route('users.updateInterests', $user->id)}}" method="post">
+    <form action="{{route('users.updateRoles', $user->id)}}" method="post">
         @csrf
         @method('PUT') 
         <div class="card-header">
-            <div><b>Interesses</b></div>
+            <div><b>Cargos</b></div>
         </div>
 
         <div class="card-body">
-            @foreach (['Opção1', 'Opção2'] as $item)
+            @foreach ($roles as $role)
                 <div class="form-check">
                     <input 
-                        class="form-check-input @error('interests') is-invalid @enderror" 
+                        class="form-check-input @error('roles') is-invalid @enderror" 
                         type="checkbox" 
-                        value="{{ $item }}"
-                        name="interests[][name]"
-                        @checked(in_array($item, $user->interests->pluck('name')->toArray() ))
+                        value="{{ $role->id }}"
+                        name="roles[]"
+                        @checked(in_array($role->name, $user->roles->pluck('name')->toArray() ))
                     >
                     <label class="form-check-label">
-                        {{ $item }}
+                        {{ $role->name }}
                     </label>
 
                     @if($loop->last)
-                        @error('interests')
+                        @error('roles')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     @endif   
