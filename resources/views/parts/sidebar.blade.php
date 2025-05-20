@@ -24,12 +24,15 @@
               role="menu"
               data-accordion="false"
             >
+            <li class="nav-header">PAINEL DE CONTROLE</li>
               <li class="nav-item">
-                <a href="{{ route('users.index') }}" class="nav-link">
-                  <i class="nav-icon bi bi-person "></i>
-                  <p>Usuários</p>
+                <a href="#" class="nav-link">
+                  <i class="nav-icon bi bi-tv "></i>
+                  <p>Video Wall</p>
                 </a>
               </li>
+
+              
 
               <!-- li class="nav-header">DOCUMENTATIONS
               <li class="nav-item">
@@ -90,26 +93,23 @@
                   <p>Browser Support</p>
                 </a>
               </li -->
-              
-              <li class="nav-header">LABELS</li>
+
+              <br>
+              <li class="nav-header">CONFIGURAÇÕES</li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <i class="nav-icon bi bi-circle text-danger"></i>
-                  <p class="text">Important</p>
+                  <i class="nav-icon bi bi-person "></i>
+                  <p>Perfil</p>
                 </a>
               </li>
+
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon bi bi-circle text-warning"></i>
-                  <p>Warning</p>
+                <a href="{{ route('users.index') }}" class="nav-link">
+                  <i class="nav-icon bi bi-people "></i>
+                  <p>Usuários</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon bi bi-circle text-info"></i>
-                  <p>Informational</p>
-                </a>
-              </li>
+
             </ul>
             <!--end::Sidebar Menu-->
           </nav>
