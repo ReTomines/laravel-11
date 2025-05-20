@@ -5,13 +5,24 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\UserProfile;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::paginate(10);
+        $users = User::query();
+
+        // Filtro pesquisa
+        $users->when($request->keyword, function($query, $keyword) {
+            $query->where(function($q) use ($keyword) {
+                $q->where('name', 'like', '%'.$keyword.'%')
+                  ->orWhere('email', 'like', '%'.$keyword.'%');
+            });
+        });
+        
+        $users = $users->paginate(10);
         return view('users.index', compact('users'));
     }
 
@@ -35,13 +46,15 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        $user->load('profile','interests');
+        Gate::authorize('edit', User::class);
+        $user->load(['profile','interests']);
         $roles = Role::all();
         return view('users.edit', compact('user','roles'));;
     }
 
     public function update(Request $request, User $user)
     {
+        Gate::authorize('edit', User::class);
         $input = $request->validate([
             'name' => 'required',
             'email' => 'required|email',
@@ -56,6 +69,7 @@ class UserController extends Controller
 
     public function updateProfile(User $user, Request $request)
     {
+        Gate::authorize('edit', User::class);
         $input = $request->validate([
             'type' => 'required',
             'address' => 'nullable'
@@ -71,6 +85,7 @@ class UserController extends Controller
 
     public function updateInterests(User $user, Request $request)
     {
+        Gate::authorize('edit', User::class);
         $input = $request->validate([
             'interests' => 'nullable|array',
         ]);
@@ -87,6 +102,7 @@ class UserController extends Controller
 
     public function updateRoles(User $user, Request $request)
     {
+        Gate::authorize('edit', User::class);
         $input = $request->validate([
             'roles' => 'required|array',
         ]);
@@ -97,6 +113,7 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
+        Gate::authorize('destroy', User::class);
         $user->delete();
         return redirect()
             ->route('users.index')
