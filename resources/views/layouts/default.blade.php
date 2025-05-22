@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="pt-br">
   <!--begin::Head-->
   <head>
@@ -21,6 +21,7 @@
   <!--end::Head-->
   <!--begin::Body-->
   <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
+    
     <!--begin::App Wrapper-->
     <div class="app-wrapper">
       @include('parts.header') <!-- Header -->  

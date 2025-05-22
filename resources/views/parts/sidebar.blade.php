@@ -1,6 +1,5 @@
 <!--begin::Sidebar-->
 <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
-
         <!--begin::Sidebar Brand-->
         <div class="sidebar-brand">
           <a href="{{ route('home')}}" class="brand-link">
@@ -26,9 +25,15 @@
             >
             <li class="nav-header">PAINEL DE CONTROLE</li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('videowall.index') }}" class="nav-link">
                   <i class="nav-icon bi bi-tv "></i>
                   <p>Video Wall</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon bi bi-card-text "></i>
+                  <p>Cadastros</p>
                 </a>
               </li>
 
