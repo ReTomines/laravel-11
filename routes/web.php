@@ -22,6 +22,11 @@ Route::middleware(['auth'])->group(function () {
 
     // Área do videowall
     Route::get('/videowall', [VideowallController::class, 'index'])->name('videowall.index');
+    Route::get('/videowall/create', [VideowallController::class, 'create'])->name('videowall.create');
+    Route::post('/videowall/create', [VideowallController::class, 'store'])->name('videowall.store');
+    
+
+
 });
 
 

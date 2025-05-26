@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('localization', function (Blueprint $table) {
+        Schema::create('localizations', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
             $table->timestamps();
         });
     
         // Inserção direta dos dados fixos
-        DB::table('localization')->insert([
+        DB::table('localizations')->insert([
             ['nome' => '1º PAVIMENTO'],
             ['nome' => '2º PAVIMENTO'],
             ['nome' => '3º PAVIMENTO'],
