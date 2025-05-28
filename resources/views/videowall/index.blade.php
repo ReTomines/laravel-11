@@ -8,4 +8,10 @@
 @section('content')
     Videowall
 
+    @session('status')
+    <div class="alert alert-success">
+        {{ $value }}
+    </div>
+    @endsession
+    
 @endsection

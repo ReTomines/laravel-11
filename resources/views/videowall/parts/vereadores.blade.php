@@ -10,9 +10,9 @@
                 <div class="col-md-12">
                     <label class="form-label fw-bold">Nome político</label>
                     <input type="text" 
-                        name="nome_politico"
-                        class="form-control @error('nome_politico') is-invalid @enderror" 
-                        value="{{ old('nome_politico') }}" required>
+                           name="nome_politico"
+                           class="form-control @error('nome_politico') is-invalid @enderror" 
+                           value="{{ old('nome_politico') }}" required>
                     @error('nome_politico')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -21,7 +21,9 @@
                 <!-- Título -->
                 <div class="col-md-4">
                     <label class="form-label fw-bold">Título</label>
-                    <select class="form-select" name="titulo" required>
+                    <select name="titulo"
+                            class="form-select @error('titulo') is-invalid @enderror" 
+                            required>
                         <option value="">Selecione um título</option>
                         <option value="vereador">Vereador</option>
                         <option value="vereadora">Vereadora</option>
@@ -55,7 +57,13 @@
                 <!-- Sala -->
                 <div class="col-md-6">
                     <label class="form-label fw-bold">Sala</label>
-                    <input type="text" class="form-control" name="sala" value="{{ old('sala') }}">
+                    <input type="text" 
+                           class="form-control @error('sala') is-invalid @enderror" 
+                           name="sala" 
+                           value="{{ old('sala') }}" required>
+                    @error('sala')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <!-- Logo partido -->
