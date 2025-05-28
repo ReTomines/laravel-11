@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Setores;
 use App\Models\Vereadores;
 use App\Models\Localizations;
-use App\Models\Setores;
 use Illuminate\Http\Request;
 
 
@@ -12,7 +12,10 @@ class VideowallController extends Controller
 {
     public function index()
     {
-        return view('videowall.index');
+        $vereadores = Vereadores::with('localization')->get();
+        $setores = Setores::with('localization')->get();
+
+        return view('videowall.index', compact('vereadores', 'setores'));
     }
 
     public function create()

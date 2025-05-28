@@ -12,6 +12,6 @@ class Setores extends Model
 
     public function localization()
     {
-        return $this->belongsTo(Localization::class, 'pavimento');
+        return $this->belongsTo(Localizations::class, 'pavimento');
     }
 }
