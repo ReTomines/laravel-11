@@ -1,36 +1,26 @@
-﻿<div class="card small">
+<div class="card small">
     <div class="card-header">
         <b>Setores</b>
     </div>
 
     <div class="card-body">
-        <form action="{{ route('videowall.store') }}" method="post" class="row g-4" enctype="multipart/form-data">
+        <form action="{{ route('videowall.setores.store') }}" method="post" class="row g-3" enctype="multipart/form-data">
             @csrf            
 
-                <!-- Nome político -->
+                <!-- Nome setor -->
                 <div class="col-md-12">
-                    <label class="form-label fw-bold">Nome político</label>
+                    <label class="form-label fw-bold">Nome setor</label>
                     <input type="text" 
-                        name="nome_politico"
-                        class="form-control @error('nome_politico') is-invalid @enderror" 
-                        value="{{ old('nome_politico') }}" required>
-                    @error('nome_politico')
+                        name="nome_setor"
+                        class="form-control @error('nome_setor') is-invalid @enderror" 
+                        value="{{ old('nome_setor') }}" required>
+                    @error('nome_setor')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
 
-                <!-- Título -->
-                <div class="col-md-6">
-                    <label class="form-label fw-bold">Título</label>
-                    <select class="form-select" name="titulo" required>
-                        <option value="">Selecione um título</option>
-                        <option value="vereador">Vereador</option>
-                        <option value="vereadora">Vereadora</option>
-                    </select>
-                </div>
-
                 <!-- Pavimento -->
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label class="form-label fw-bold">Pavimento</label>
                     <select class="form-select" 
                             name="pavimento" required>
@@ -42,21 +32,20 @@
                 </div>
 
                 <!-- Sala -->
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label class="form-label fw-bold">Sala</label>
                     <input type="text" class="form-control" name="sala" value="{{ old('sala') }}">
                 </div>
 
-                <!-- Logo partido -->
-                <div class="col-md-6">
-                    <label class="form-label fw-bold">Logo do Partido</label>
-                    <input class="form-control" type="file" name="logo_partido">
-                </div>                                    
+                <!-- Ícone -->
+                <div class="col-md-4">
+                    <label class="form-label fw-bold">Ícone</label>
+                    <input class="form-control" type="file" name="icone">
+                </div>       
+                
+                <div class="form-check">
+                    <button type="submit" class="btn btn-primary">Criar</button>
+                </div>
         </form>
     </div>
-
-    <div class="card-footer">
-        <button type="submit" class="btn btn-primary">Criar</button>
-    </div>
-
 </div> 

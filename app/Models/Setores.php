@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Vereadores extends Model
+class Setores extends Model
 {
     protected $fillable = [
-        'titulo', 'abrev_titulo', 'nome_politico', 'logo_partido', 'pavimento', 'sala'
+        'nome_setor', 'pavimento', 'sala', 'icone'
     ];
 
     public function localization()

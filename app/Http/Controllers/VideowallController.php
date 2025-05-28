@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Vereadores;
 use App\Models\Localizations;
+use App\Models\Setores;
 use Illuminate\Http\Request;
 
 
@@ -26,6 +27,7 @@ class VideowallController extends Controller
         $input = $request->validate([
             'nome_politico' => 'required|string|max:255',
             'titulo' => 'required|in:vereador,vereadora',
+            'abrev_titulo' => 'nullable|string',
             'pavimento' => 'required|exists:localizations,id',
             'sala' => 'required|string|max:255',
             'logo_partido' => 'nullable|file|image|max:2048', // max 2MB
@@ -41,5 +43,28 @@ class VideowallController extends Controller
         return redirect()
             ->route('videowall.index')
             ->with('status', 'Vereador cadastrado com sucesso');
+        }
+
+        public function storeSetor(Request $request)
+        {
+            //dd($request->all());
+            $input = $request->validate([
+                'nome_setor' => 'required|string|max:255',
+                'pavimento' => 'required|exists:localizations,id',
+                'sala' => 'nullable|string|max:255',
+                'icone' => 'nullable|file|image|max:2048',
+            ]);
+        
+            // Verifica se um arquivo foi enviado
+            if ($request->hasFile('icone')) {
+                $iconePath = $request->file('icone')->store('icones', 'public');
+                $input['icone'] = $iconePath;
+            }
+        
+            Setores::create($input);
+        
+            return redirect()
+                ->route('videowall.index')
+                ->with('status', 'Setor cadastrado com sucesso');
         }
 }

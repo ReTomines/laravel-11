@@ -1,4 +1,4 @@
-﻿<div class="card small">
+<div class="card small">
     <div class="card-header">
         <b>Vereadores</b>
     </div>
@@ -6,7 +6,6 @@
     <div class="card-body">
         <form action="{{ route('videowall.store') }}" method="post" class="row g-4" enctype="multipart/form-data">
             @csrf            
-
                 <!-- Nome político -->
                 <div class="col-md-12">
                     <label class="form-label fw-bold">Nome político</label>
@@ -20,7 +19,7 @@
                 </div>
 
                 <!-- Título -->
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label class="form-label fw-bold">Título</label>
                     <select class="form-select" name="titulo" required>
                         <option value="">Selecione um título</option>
@@ -29,8 +28,20 @@
                     </select>
                 </div>
 
+                <!-- Abreviação título -->
+                <div class="col-md-4">
+                    <label class="form-label fw-bold">Abreviação título</label>
+                    <input type="text" 
+                        name="abrev_titulo"
+                        class="form-control @error('abrev_titulo') is-invalid @enderror" 
+                        value="{{ old('abrev_titulo') }}" required>
+                    @error('abrev_titulo')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
                 <!-- Pavimento -->
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label class="form-label fw-bold">Pavimento</label>
                     <select class="form-select" 
                             name="pavimento" required>
@@ -51,12 +62,11 @@
                 <div class="col-md-6">
                     <label class="form-label fw-bold">Logo do Partido</label>
                     <input class="form-control" type="file" name="logo_partido">
-                </div>                                    
+                </div>      
+
+                <div class="form-check">
+                    <button type="submit" class="btn btn-primary">Criar</button>
+                </div>
         </form>
-    </div>
-
-    <div class="card-footer">
-        <button type="submit" class="btn btn-primary">Criar</button>
-    </div>
-
+    </div>  
 </div> 
