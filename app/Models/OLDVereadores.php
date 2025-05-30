@@ -7,16 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Vereadores extends Model
 {
     protected $fillable = [
-        'titulo', 'abrev_titulo', 'nome_politico', 'partido', 'pavimento', 'sala'
+        'titulo', 'abrev_titulo', 'nome_politico', 'logo_partido', 'pavimento', 'sala'
     ];
 
     public function localization()
     {
         return $this->belongsTo(Localizations::class, 'pavimento');
-    }
-
-    public function partido()
-    {
-        return $this->belongsTo(Partidos::class, 'partido');
     }
 }

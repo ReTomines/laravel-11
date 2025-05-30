@@ -6,3 +6,4 @@ import.meta.glob([
 import 'bootstrap';
 import 'admin-lte';
 import './overlayscrollbars.js';
+import './logoDinamico.js';

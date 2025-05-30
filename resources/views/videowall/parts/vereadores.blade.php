@@ -55,7 +55,7 @@
                 </div>
 
                 <!-- Sala -->
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label class="form-label fw-bold">Sala</label>
                     <input type="text" 
                            class="form-control @error('sala') is-invalid @enderror" 
@@ -66,10 +66,38 @@
                     @enderror
                 </div>
 
-                <!-- Logo partido -->
+                <!-- Partido -->
                 <div class="col-md-6">
-                    <label class="form-label fw-bold">Logo do Partido</label>
-                    <input class="form-control" type="file" name="logo_partido">
+                    <label class="form-label fw-bold">Partido</label>
+
+                    <div class="row g-3 align-items-center">
+
+                        <!-- Select Partido -->
+                        <div class="col-md-6">    
+
+                            <select class="form-select" 
+                                    name="partido" 
+                                    id="selectPartido" required
+                                    required>
+                                <option value="">Selecione um partido</option>
+                                @foreach ($partidos as $partido)
+                                    <option value="{{ $partido->id }}" 
+                                            data-logo="{{ asset('storage/' . $partido->logo) }}">
+                                            {{ $partido->nome_partido }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>      
+
+                        <!-- Logo Partido -->
+                        <div class="col-md-4">
+                            <img id="logoPartido" 
+                                src="" 
+                                alt="Logo do Partido" 
+                                class="img-fluid border rounded"
+                                style="width: auto; height: 40px; object-fit: contain; display: none;">
+                        </div>
+                    </div>
                 </div>      
 
                 <div class="form-check">
