@@ -24,6 +24,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/videowall', [VideowallController::class, 'index'])->name('videowall.index');
     Route::get('/videowall/create', [VideowallController::class, 'create'])->name('videowall.create');
     Route::post('/videowall/create', [VideowallController::class, 'store'])->name('videowall.store');
+    Route::post('/videowall/partidos', [VideowallController::class, 'storePartido'])->name('videowall.partidos.store');
     Route::post('/videowall/setores', [VideowallController::class, 'storeSetor'])->name('videowall.setores.store');
 
     

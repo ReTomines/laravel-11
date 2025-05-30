@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Setores;
+use App\Models\Partidos;
 use App\Models\Vereadores;
 use App\Models\Localizations;
 use Illuminate\Http\Request;
@@ -69,5 +70,24 @@ class VideowallController extends Controller
             return redirect()
                 ->route('videowall.index')
                 ->with('status', 'Setor cadastrado com sucesso');
+        }
+
+        public function storePartido(Request $request)
+    {
+        $input = $request->validate([
+            'nome_partido' => 'required|string|max:255',
+            'logo' => 'required|file|image|max:2048', // max 2MB
+        ]);
+
+        // Verifica se um arquivo foi enviado
+        if ($request->hasFile('logo')) {
+            $logoPath = $request->file('logo')->store('logos', 'public');
+            $input['logo'] = $logoPath;
+        }
+
+        Partidos::create($input);
+        return redirect()
+            ->route('videowall.index')
+            ->with('status', 'Vereador cadastrado com sucesso');
         }
 }
