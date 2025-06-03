@@ -1,3 +1,9 @@
+@if($errors->has('duplicado'))
+    <div class="alert alert-danger">
+        {{ $errors->first('duplicado') }}
+    </div>
+@endif
+
 <div class="card small">
     <div class="card-header">
         <b>Setores</b>

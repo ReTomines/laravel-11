@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('vereadores', function (Blueprint $table) {
+        Schema::create('setores', function (Blueprint $table) {
             $table->id();
-            $table->enum('titulo', ['vereador', 'vereadora']);
-            $table->string('nome_politico');
-            $table->string('abrev_titulo')->nullable();
-            $table->string('logo_partido')->nullable(); // caso o logo seja opcional
+            $table->string('nome_setor');
             $table->unsignedBigInteger('pavimento');
-            $table->string('sala');
-            
+            $table->string('sala')->nullable();
+            $table->string('icone')->nullable(); // caso o logo seja opcional
+
             // chave estrangeira para localizations
             $table->foreign('pavimento')
                   ->references('id')
@@ -35,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vereadores');
+        Schema::dropIfExists('setores');
     }
 };

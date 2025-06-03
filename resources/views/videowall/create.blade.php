@@ -1,3 +1,8 @@
+@php
+    $activeTab = session('active_tab', 'vereadores'); // "vereadores" como padrão
+@endphp
+
+
 @extends('layouts.default')
 @section('page-title', 'Incluir dados')
 @section('content')
@@ -7,15 +12,15 @@
     <ul class="nav nav-pills card-header-pills">
 
       <li class="nav-item">
-      <a class="nav-link active" id="vereadores-tab" data-bs-toggle="tab" href="#vereadores" role="tab" aria-controls="vereadores" aria-selected="true">Vereadores</a>
+      <a class="nav-link {{ $activeTab == 'vereadores' ? 'active' : '' }}" id="vereadores-tab" data-bs-toggle="tab" href="#vereadores" role="tab" aria-controls="vereadores" aria-selected="true">Vereadores</a>
       </li>
 
       <li class="nav-item">
-      <a class="nav-link" id="setores-tab" data-bs-toggle="tab" href="#setores" role="tab" aria-controls="setores" aria-selected="false">Setores</a>
+      <a class="nav-link {{ $activeTab == 'setores' ? 'active' : '' }}" id="setores-tab" data-bs-toggle="tab" href="#setores" role="tab" aria-controls="setores" aria-selected="false">Setores</a>
       </li>
 
       <li class="nav-item">
-      <a class="nav-link" id="partidos-tab" data-bs-toggle="tab" href="#partidos" role="tab" aria-controls="partidos" aria-selected="false">partidos</a>
+      <a class="nav-link {{ $activeTab == 'partidos' ? 'active' : '' }}" id="partidos-tab" data-bs-toggle="tab" href="#partidos" role="tab" aria-controls="partidos" aria-selected="false">partidos</a>
       </li>
 
     </ul>
@@ -24,15 +29,15 @@
   <div class="card-body">
     <div class="tab-content" id="nav-tabContent">
 
-      <div class="tab-pane fade show active" id="vereadores" role="tabpanel" aria-labelledby="vereadores-tab">
+      <div class="tab-pane fade {{ $activeTab == 'vereadores' ? 'show active' : '' }}" id="vereadores" role="tabpanel" aria-labelledby="vereadores-tab">
         @include('videowall.parts.vereadores')
       </div>
 
-      <div class="tab-pane fade" id="setores" role="tabpanel" aria-labelledby="setores-tab">
+      <div class="tab-pane fade {{ $activeTab == 'setores' ? 'show active' : '' }}" id="setores" role="tabpanel" aria-labelledby="setores-tab">
         @include('videowall.parts.setores')
       </div>
 
-      <div class="tab-pane fade" id="partidos" role="tabpanel" aria-labelledby="partidos-tab">
+      <div class="tab-pane fade {{ $activeTab == 'partidos' ? 'show active' : '' }}" id="partidos" role="tabpanel" aria-labelledby="partidos-tab">
         @include('videowall.parts.partidos')
       </div>
       

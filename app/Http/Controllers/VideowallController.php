@@ -38,6 +38,15 @@ class VideowallController extends Controller
             'partido' => 'nullable|exists:partidos,id', // max 2MB
         ]);
 
+        $exists = Vereadores::where('nome_politico', $input['nome_politico'])->exists();
+        if ($exists) {
+            return redirect()
+                ->route('videowall.create')
+                ->withErrors(['duplicado' => 'Vereador já cadastrado com esse nome.'])
+                ->withInput()
+                ->with('active_tab', 'vereadores');
+        }
+
         /* // Verifica se um arquivo foi enviado
         if ($request->hasFile('logo_partido')) {
             $logoPath = $request->file('logo_partido')->store('logos', 'public');
@@ -48,37 +57,57 @@ class VideowallController extends Controller
         return redirect()
             ->route('videowall.index')
             ->with('status', 'Vereador cadastrado com sucesso');
-        }
+    }
 
-        public function storeSetor(Request $request)
-        {
-            //dd($request->all());
-            $input = $request->validate([
-                'nome_setor' => 'required|string|max:255',
-                'pavimento' => 'required|exists:localizations,id',
-                'sala' => 'nullable|string|max:255',
-                'icone' => 'nullable|file|image|max:2048',
-            ]);
+    //** storeSetor
+    public function storeSetor(Request $request)
+    {
+        //dd($request->all());
+        $input = $request->validate([
+            'nome_setor' => 'required|string|max:255',
+            'pavimento' => 'required|exists:localizations,id',
+            'sala' => 'nullable|string|max:255',
+            'icone' => 'nullable|file|image|max:2048',
+        ]);
         
-            // Verifica se um arquivo foi enviado
-            if ($request->hasFile('icone')) {
-                $iconePath = $request->file('icone')->store('icones', 'public');
-                $input['icone'] = $iconePath;
-            }
-        
-            Setores::create($input);
-        
+        $exists = Setores::where('nome_setor', $input['nome_setor'])->exists();
+        if ($exists) {
             return redirect()
-                ->route('videowall.index')
-                ->with('status', 'Setor cadastrado com sucesso');
+                ->route('videowall.create')
+                ->withErrors(['duplicado' => 'Setor já cadastrado com esse nome.'])
+                ->withInput()
+                ->with('active_tab', 'setores');
         }
 
-        public function storePartido(Request $request)
+        // Verifica se um arquivo foi enviado
+        if ($request->hasFile('icone')) {
+            $iconePath = $request->file('icone')->store('icones', 'public');
+            $input['icone'] = $iconePath;
+        }
+    
+        Setores::create($input);
+    
+        return redirect()
+            ->route('videowall.index')
+            ->with('status', 'Setor cadastrado com sucesso');
+    }
+
+    //** storePartido
+    public function storePartido(Request $request)
     {
         $input = $request->validate([
             'nome_partido' => 'required|string|max:255',
             'logo' => 'required|file|image|max:2048', // max 2MB
         ]);
+
+        $exists = Partidos::where('nome_partido', $input['nome_partido'])->exists();
+        if ($exists) {
+            return redirect()
+                ->route('videowall.create')
+                ->withErrors(['duplicado' => 'Partido já cadastrado com esse nome.'])
+                ->withInput()
+                ->with('active_tab', 'partidos');
+        }
 
         // Verifica se um arquivo foi enviado
         if ($request->hasFile('logo')) {

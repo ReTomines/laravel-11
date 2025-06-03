@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('partidos', function (Blueprint $table) {
             $table->id();
-            $table->string('nome_partido');
+            $table->string('nome_partido')->unique();
             $table->string('logo'); // caso 
 
             $table->timestamps();
