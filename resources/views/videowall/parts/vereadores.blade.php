@@ -10,7 +10,7 @@
     </div>
 
     <div class="card-body">
-        <form action="{{ route('videowall.store') }}" method="post" class="row g-4" enctype="multipart/form-data">
+        <form action="{{ route('videowall.vereadores.store') }}" method="post" class="row g-4" enctype="multipart/form-data">
             @csrf            
                 <!-- Nome político -->
                 <div class="col-md-12">

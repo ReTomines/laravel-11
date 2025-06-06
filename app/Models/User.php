@@ -59,4 +59,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class);
     }
+
+    public function isAdmin(): bool
+    {
+        return $this->is_admin === true;
+    }
 }

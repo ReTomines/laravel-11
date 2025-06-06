@@ -1,6 +1,13 @@
 ﻿@extends('layouts.default')
 @section('page-title', 'Adicionar Usuário')
 @section('content')
+
+@if($errors->has('duplicado'))
+    <div class="alert alert-danger">
+        {{ $errors->first('duplicado') }}
+    </div>
+@endif
+
     <form action="{{ route('users.store') }}" method="post">
         @csrf
         <!-- Campo Nome -->

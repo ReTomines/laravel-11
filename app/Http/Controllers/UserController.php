@@ -38,10 +38,23 @@ class UserController extends Controller
             'email' => 'required|email',
             'password' => 'required|min:6'
         ]);
+
+        $exists = User::where('name', $input['name'])
+                      ->orWhere('email', $input['email'])
+                      ->exists();
+        if ($exists) {
+            return redirect()
+                ->route('users.create')
+                ->withErrors(['duplicado' => 'Usuário já cadastrado com esse nome ou email.'])
+                ->withInput();
+        }
+
         User::create($input);
         return redirect()
             ->route('users.index')
             ->with('status', 'Usuário criado com sucesso');
+
+        
     }
 
     public function edit(User $user)

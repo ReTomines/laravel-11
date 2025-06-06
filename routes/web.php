@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\VideowallController;
+use App\Http\Controllers\{UserController, VideowallController};
+use App\Http\Controllers\Stores\{VereadoresController, PartidosController, SetoresController};
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->group(function () {
@@ -23,11 +23,13 @@ Route::middleware(['auth'])->group(function () {
     // Área do videowall
     Route::get('/videowall', [VideowallController::class, 'index'])->name('videowall.index');
     Route::get('/videowall/create', [VideowallController::class, 'create'])->name('videowall.create');
-    Route::post('/videowall/create', [VideowallController::class, 'store'])->name('videowall.store');
-    Route::post('/videowall/partidos', [VideowallController::class, 'storePartido'])->name('videowall.partidos.store');
-    Route::post('/videowall/setores', [VideowallController::class, 'storeSetor'])->name('videowall.setores.store');
+    Route::post('/videowall/vereadores', [VereadoresController::class, 'store'])->name('videowall.vereadores.store');
+    Route::post('/videowall/partidos', [PartidosController::class, 'storePartido'])->name('videowall.partidos.store');
+    Route::post('/videowall/setores', [SetoresController::class, 'storeSetor'])->name('videowall.setores.store');
 
-    
+    Route::delete('/videowall/vereadores/{vereador}', [VideowallController::class, 'destroyVereador'])->name('videowall.vereadores.destroy');
+    Route::delete('/videowall/setores/{setor}', [VideowallController::class, 'destroySetor'])->name('videowall.setores.destroy');
+    Route::delete('/videowall/partidos/{partido}', [VideowallController::class, 'destroyPartido'])->name('videowall.partidos.destroy');
 
 
 });

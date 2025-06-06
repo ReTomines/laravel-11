@@ -1,4 +1,8 @@
-﻿@extends('layouts.default')
+@php
+    $activeTab = session('active_tab', 'vereadores'); // "vereadores" como padrão
+@endphp
+
+@extends('layouts.default')
 @section('page-title', 'VideoWall')
 
 @section('page-actions')
@@ -29,33 +33,46 @@
         </div>
     </form>
 
-    <table class="table">
 
-    <thead>
-        <tr>
-        <th scope="col">#</th>
-        <th scope="col">Vereador</th>
-        <th scope="col">Partido</th>
-        <th scope="col">Sala</th>
-        <th scope="col">Ação</th>
+<!-- Exibição -->
+<div class="card">
 
-        </tr>
-    </thead>
-    <tbody>
-    @foreach ($vereadores as $vereador)
-        <tr>
-            <th scope="row">{{ $vereador->id }}</th>
-            <td>{{ $vereador->nome_politico }}</td>
-            <td>
-                <img src="{{ asset('storage/' . $vereador->logo_partido) }}">
-            </td>
-            <td>{{ $vereador->sala }}</td>
-            <td>
+    <div class="card-header">
+        <ul class="nav nav-pills card-header-pills">
+
+            <li class="nav-item">
+                <a class="nav-link {{ $activeTab == 'vereadores' ? 'active' : '' }}" id="vereadores-tab" data-bs-toggle="tab" href="#vereadores" role="tab" aria-controls="vereadores" aria-selected="true">Vereadores</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ $activeTab == 'setores' ? 'active' : '' }}" id="setores-tab" data-bs-toggle="tab" href="#setores" role="tab" aria-controls="setores" aria-selected="false">Setores</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ $activeTab == 'partidos' ? 'active' : '' }}" id="partidos-tab" id="partidos-tab" data-bs-toggle="tab" href="#partidos" role="tab" aria-controls="partidos" aria-selected="false">partidos</a>
+            </li>
+
+        </ul>
+    </div>
+
+    <div class="card-body">
+        <div class="tab-content" id="nav-tabContent">
             
-            </td>
-        </tr>
-    @endforeach
-    </tbody>
-    </table>
+            <div class="tab-pane fade {{ $activeTab == 'vereadores' ? 'show active' : '' }}" id="vereadores" role="tabpanel" aria-labelledby="vereadores-tab">
+                @include('videowall.parts-index.ind-vereadores')
+            </div>
+
+            <div class="tab-pane fade {{ $activeTab == 'setores' ? 'show active' : '' }}" id="setores" role="tabpanel" aria-labelledby="setores-tab">
+                @include('videowall.parts-index.ind-setores')
+            </div>
+
+            <div class="tab-pane fade {{ $activeTab == 'partidos' ? 'show active' : '' }}" id="partidos" role="tabpanel" aria-labelledby="partidos-tab">
+                @include('videowall.parts-index.ind-partidos')
+            </div>
+        
+        </div>
+    </div>
+
+</div>
 
 @endsection
