@@ -29,13 +29,18 @@ class VideowallController extends Controller
         return view('videowall.create', compact('pavimentos', 'partidos'));
     }
 
-    public function destroyPartido(Partidos $partido)
+    public function destroyVereador(Vereadores $vereador)
     {
-        return $this->destroy($partido);
+        return $this->destroy($vereador);
     }
-
+    
     public function destroySetor(Setores $setor)
     {
         return $this->destroy($setor);
+    }
+
+    public function destroyPartido(Partidos $partido)
+    {
+        return $this->destroy($partido);
     }
 }
