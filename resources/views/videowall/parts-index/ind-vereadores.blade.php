@@ -26,13 +26,18 @@
                 <td> {{ $vereador->pavimento }} </td>
                 <td> {{ $vereador->sala }} </td>
                 <td>
-                    @can('destroy', $vereador)
-                        <form action="{{ route('videowall.vereadores.destroy', $vereador->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
+                    <form action="{{ route('videowall.vereadores.destroy', $vereador->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+
+                        @can('edit', App\Models\User::class)     
+                            <a href="" class="btn btn-primary btn-sm">Editar</a>
+                        @endcan    
+
+                        @can('destroy', $vereador)
                             <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
-                        </form>
-                    @endcan
+                        @endcan
+                    </form>
                 </td>
             </tr>
         @endforeach

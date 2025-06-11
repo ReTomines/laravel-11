@@ -16,6 +16,14 @@ class PartidosPolicy
         //
     }
 
+    public function edit(User $user, Partidos $partido): bool
+    {
+        return $user
+            ->roles()
+            ->where('name', 'admin')
+            ->exists();
+    }
+
     public function destroy(User $user, Partidos $partido): bool
     {
         return $user

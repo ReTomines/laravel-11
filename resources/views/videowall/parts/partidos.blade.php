@@ -6,7 +6,7 @@
 
 <div class="card small">
     <div class="card-header">
-        <b>Setores</b>
+        <b>Partidos</b>
     </div>
 
     <div class="card-body">

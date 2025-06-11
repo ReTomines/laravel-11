@@ -31,6 +31,9 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/videowall/setores/{setor}', [VideowallController::class, 'destroySetor'])->name('videowall.setores.destroy');
     Route::delete('/videowall/partidos/{partido}', [VideowallController::class, 'destroyPartido'])->name('videowall.partidos.destroy');
 
+    // Rotas para Partidos
+    Route::get('/videowall/partidos/{partido}/edit', [PartidosController::class, 'edit'])->name('videowall.partidos.edit');
+    Route::put('/videowall/partidos/{partido}', [PartidosController::class, 'update'])->name('videowall.partidos.update');
 
 });
 

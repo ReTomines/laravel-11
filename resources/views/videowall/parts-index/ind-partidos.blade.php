@@ -28,13 +28,18 @@
                         style="width: auto; height: 36px; object-fit: contain;">
                 </td>
                 <td>
-                    @can('destroy', $partido)
-                        <form action="{{ route('videowall.partidos.destroy', $partido->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
+                    <form action="{{ route('videowall.partidos.destroy', $partido->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+
+                        @can('edit', $partido)     
+                            <a href="{{ route('videowall.partidos.edit', $partido->id) }}" class="btn btn-primary btn-sm">Editar</a>
+                        @endcan
+
+                        @can('destroy', $partido)
                             <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
-                        </form>
-                    @endcan
+                        @endcan
+                    </form>
                 </td>
             </tr>
         @endforeach

@@ -21,6 +21,7 @@ class VideowallController extends Controller
         return view('videowall.index', compact('vereadores', 'setores', 'partidos'));
     }
 
+    // Criar ...........................................
     public function create()
     {
         $pavimentos = Localizations::orderBy('nome', 'asc')->get();
@@ -29,6 +30,7 @@ class VideowallController extends Controller
         return view('videowall.create', compact('pavimentos', 'partidos'));
     }
 
+    // Deletar ...........................................
     public function destroyVereador(Vereadores $vereador)
     {
         return $this->destroy($vereador);

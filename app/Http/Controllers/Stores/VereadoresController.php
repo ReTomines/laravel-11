@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Stores;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Models\{Vereadores, Partidos};
+use Illuminate\Http\Request;
 
 class VereadoresController extends Controller
 {

@@ -19,13 +19,20 @@
                 <td> {{ $setor->pavimento }} </td>
                 <td> {{ $setor->sala }} </td>
                 <td>
-                    @can('destroy', $setor)
+                    
                         <form action="{{ route('videowall.setores.destroy', $setor->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                            
+                            @can('edit', App\Models\User::class)     
+                                <a href="" class="btn btn-primary btn-sm">Editar</a>
+                            @endcan   
+
+                            @can('destroy', $setor)
+                                <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                            @endcan
                         </form>
-                    @endcan
+                    
                 </td>
             </tr>
         @endforeach

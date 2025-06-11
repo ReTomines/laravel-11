@@ -49,7 +49,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link {{ $activeTab == 'partidos' ? 'active' : '' }}" id="partidos-tab" id="partidos-tab" data-bs-toggle="tab" href="#partidos" role="tab" aria-controls="partidos" aria-selected="false">partidos</a>
+                <a class="nav-link {{ $activeTab == 'partidos' ? 'active' : '' }}" id="partidos-tab" id="partidos-tab" data-bs-toggle="tab" href="#partidos" role="tab" aria-controls="partidos" aria-selected="false">Partidos</a>
             </li>
 
         </ul>
