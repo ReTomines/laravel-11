@@ -35,6 +35,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/videowall/partidos/{partido}/edit', [PartidosController::class, 'edit'])->name('videowall.partidos.edit');
     Route::put('/videowall/partidos/{partido}', [PartidosController::class, 'update'])->name('videowall.partidos.update');
 
+    // Rotas para Setores
+    Route::get('/videowall/setores/{setor}/edit', [SetoresController::class, 'edit'])->name('videowall.setores.edit');
+    Route::put('/videowall/setores/{setor}', [SetoresController::class, 'update'])->name('videowall.setores.update');
+
+    // Rotas para Vereadores    
+    Route::get('/videowall/vereadores/{vereador}/edit', [VereadoresController::class, 'edit'])->name('videowall.vereadores.edit');
+    Route::put('/videowall/vereadores/{vereador}', [VereadoresController::class, 'update'])->name('videowall.vereadores.update');
+    
 });
 
 

@@ -20,6 +20,13 @@ return new class extends Migration
             $table->unsignedBigInteger('pavimento');
             $table->string('sala');
 
+            // Novo campo partido_id com chave estrangeira
+            $table->unsignedBigInteger('partido_id')->nullable();
+            $table->foreign('partido_id')
+                  ->references('id')
+                  ->on('partidos')
+                  ->cascadeOnDelete(); 
+
             // chave estrangeira para localizations
             $table->foreign('pavimento')
                   ->references('id')

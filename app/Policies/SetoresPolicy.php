@@ -14,6 +14,14 @@ class SetoresPolicy
         //
     }
 
+    public function edit(User $user, Setores $setor): bool
+    {
+        return $user
+            ->roles()
+            ->where('name', 'admin')
+            ->exists();
+    }
+
     public function destroy(User $user, Setores $setor): bool
     {
         return $user

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Stores;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\{Partidos, Vereadores};
 
 class PartidosController extends Controller
@@ -25,13 +25,7 @@ class PartidosController extends Controller
                 ->withInput()
                 ->with('active_tab', 'partidos');
         }
-
-        /*/ Verifica se um arquivo foi enviado
-        if ($request->hasFile('logo')) {
-            $logoPath = $request->file('logo')->store('logos', 'public');
-            $input['logo'] = $logoPath;
-        }*/
-
+        
         // Armazena o logo
         $logoPath = $request->file('logo')->store('logos', 'public');
         $input['logo'] = $logoPath;
@@ -39,15 +33,18 @@ class PartidosController extends Controller
         Partidos::create($input);
         return redirect()
             ->route('videowall.index')
-            ->with('status', 'Vereador cadastrado com sucesso');
+            ->with('status', 'Vereador cadastrado com sucesso')
+            ->with('active_tab', 'partidos');
     }
 
-    // Update Partido .......................................
+    // Edita Partido .......................................
     public function edit(Partidos $partido)
     {
-        return view('videowall.edit', compact('partido'));
+        return view('videowall.edit', compact('partido'))
+             ->with('active_tab', 'partidos');
     }
 
+    // Update Partido ...........................................
     public function update(Request $request, Partidos $partido)
     {
         $input = $request->validate([
@@ -93,6 +90,7 @@ class PartidosController extends Controller
 
         return redirect()
             ->route('videowall.index')
-            ->with('status', 'Partido atualizado com sucesso');
+            ->with('status', 'Partido atualizado com sucesso')
+            ->with('active_tab', 'partidos');
     }
 }

@@ -26,8 +26,9 @@ class VideowallController extends Controller
     {
         $pavimentos = Localizations::orderBy('nome', 'asc')->get();
         $partidos = Partidos::orderBy('nome_partido', 'asc')->get();
+        $activeTab = request('tab', 'vereadores'); // valor da URL
         //dd($pavimentos);
-        return view('videowall.create', compact('pavimentos', 'partidos'));
+        return view('videowall.create', compact('pavimentos', 'partidos', 'activeTab'));
     }
 
     // Deletar ...........................................

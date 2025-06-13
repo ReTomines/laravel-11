@@ -30,8 +30,8 @@
                         @csrf
                         @method('DELETE')
 
-                        @can('edit', App\Models\User::class)     
-                            <a href="" class="btn btn-primary btn-sm">Editar</a>
+                        @can('edit', $vereador)     
+                            <a href="{{ route('videowall.vereadores.edit', $vereador->id) }}" class="btn btn-primary btn-sm">Editar</a>
                         @endcan    
 
                         @can('destroy', $vereador)

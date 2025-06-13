@@ -14,6 +14,14 @@ class VereadoresPolicy
         //
     }
 
+    public function edit(User $user, Vereadores $vereador)
+    {
+        return $user
+            ->roles()
+            ->where('name', 'admin')
+            ->exists();
+    }
+
     public function destroy(User $user, Vereadores $vereador): bool
     {
         return $user

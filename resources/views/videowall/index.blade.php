@@ -6,7 +6,13 @@
 @section('page-title', 'VideoWall')
 
 @section('page-actions')
-    <a href="{{ route('videowall.create') }}" class="btn btn-primary btn-sm">Adicionar</a>
+
+    @php
+        $activeTab = session('active_tab', request('tab', 'vereadores')); 
+    @endphp
+
+    <a href="{{ route('videowall.create', ['tab' => $activeTab]) }}" class="btn btn-primary btn-sm">Adicionar</a>
+
 @endsection
 
 @section('content')

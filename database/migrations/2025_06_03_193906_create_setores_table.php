@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nome_setor');
             $table->unsignedBigInteger('pavimento');
             $table->string('sala')->nullable();
-            $table->string('icone')->nullable(); // caso o logo seja opcional
+            $table->string('icone')->nullable(); // logo opcional
 
             // chave estrangeira para localizations
             $table->foreign('pavimento')

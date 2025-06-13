@@ -1,3 +1,9 @@
+@if(session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+@endif
+
 @if($errors->has('duplicado'))
     <div class="alert alert-danger">
         {{ $errors->first('duplicado') }}
@@ -6,19 +12,21 @@
 
 <div class="card small">
     <div class="card-header">
-        <b>Vereadores</b>
+        <b>Editar Vereador</b>
     </div>
 
     <div class="card-body">
-        <form action="{{ route('videowall.vereadores.store') }}" method="post" class="row g-4" enctype="multipart/form-data">
-            @csrf            
+        <form action="{{ route('videowall.vereadores.update', $vereador->id) }}" method="post" class="row g-4" enctype="multipart/form-data">
+            @csrf 
+            @method('PUT')
+
                 <!-- Nome político -->
                 <div class="col-md-12">
                     <label class="form-label fw-bold">Nome político</label>
                     <input type="text" 
                            name="nome_politico"
                            class="form-control @error('nome_politico') is-invalid @enderror" 
-                           value="{{ old('nome_politico') }}" required>
+                           value="{{ old('nome_politico', $vereador->nome_politico) }}" required>
                     @error('nome_politico')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -28,11 +36,13 @@
                 <div class="col-md-4">
                     <label class="form-label fw-bold">Título</label>
                     <select name="titulo"
-                            class="form-select @error('titulo') is-invalid @enderror" 
+                            class="form-select @error('titulo') is-invalid @enderror"
                             required>
                         <option value="">Selecione um título</option>
-                        <option value="vereador">Vereador</option>
-                        <option value="vereadora">Vereadora</option>
+                        <option value="vereador" 
+                                {{ old('titulo', $vereador->titulo) == 'vereador' ? 'selected' : '' }}>Vereador</option>
+                        <option value="vereadora"
+                                {{ old('titulo', $vereador->titulo) == 'vereadora' ? 'selected' : '' }}>Vereadora</option>
                     </select>
                 </div>
 
@@ -42,7 +52,7 @@
                     <input type="text" 
                         name="abrev_titulo"
                         class="form-control @error('abrev_titulo') is-invalid @enderror" 
-                        value="{{ old('abrev_titulo') }}" required>
+                        value="{{ old('abrev_titulo', $vereador->abrev_titulo) }}" required>
                     @error('abrev_titulo')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -55,7 +65,10 @@
                             name="pavimento" required>
                         <option value="">Selecione um pavimento</option>
                         @foreach ($pavimentos as $pavimento)
-                            <option value="{{ $pavimento->id }}">{{ $pavimento->nome }}</option>
+                            <option value="{{ $pavimento->id }}"
+                                    @if(old('pavimento', $vereador->pavimento) == $pavimento->id) selected @endif >
+                                    {{ $pavimento->nome }}
+                        </option>
                         @endforeach
                     </select>
                 </div>
@@ -66,7 +79,7 @@
                     <input type="text" 
                            class="form-control @error('sala') is-invalid @enderror" 
                            name="sala" 
-                           value="{{ old('sala') }}" required>
+                           value="{{ old('sala', $vereador->sala) }}" required>
                     @error('sala')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -85,12 +98,15 @@
                                     name="partido" 
                                     id="selectPartido">
                                 <option value="">Selecione um partido</option>
+
                                 @foreach ($partidos as $partido)
-                                    <option value="{{ $partido->id }}" 
-                                            data-logo="{{ asset('storage/' . $partido->logo) }}">
-                                            {{ $partido->nome_partido }}
+                                    <option value="{{ $partido->id }}"
+                                        {{ old('partido', $vereador->partido_id) == $partido->id ? 'selected' : '' }}
+                                        data-logo="{{ asset('storage/' . $partido->logo) }}">
+                                        {{ $partido->nome_partido }}
                                     </option>
                                 @endforeach
+
                             </select>
                         </div>      
 
@@ -106,7 +122,8 @@
                 </div>      
 
                 <div class="form-check">
-                    <button type="submit" class="btn btn-primary">Criar</button>
+                    <button type="submit" class="btn btn-primary">Atualizar</button>
+                    <a href="{{ url()->previous() }}" class="btn btn-secondary">Cancelar</a>
                 </div>
         </form>
     </div>  
