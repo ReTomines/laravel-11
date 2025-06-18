@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{UserController, VideowallController};
+use App\Http\Controllers\{UserController, VideowallController, SlidesController};
 use App\Http\Controllers\Stores\{VereadoresController, PartidosController, SetoresController};
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +19,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/users/{user}/interests', [UserController::class, 'updateInterests'])->name('users.updateInterests');
     Route::put('/users/{user}/roles', [UserController::class, 'updateRoles'])->name('users.updateRoles');
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+    // Fim Autenticação ...................................................................................................................
 
     // Área do videowall
     Route::get('/videowall', [VideowallController::class, 'index'])->name('videowall.index');
@@ -42,7 +43,10 @@ Route::middleware(['auth'])->group(function () {
     // Rotas para Vereadores    
     Route::get('/videowall/vereadores/{vereador}/edit', [VereadoresController::class, 'edit'])->name('videowall.vereadores.edit');
     Route::put('/videowall/vereadores/{vereador}', [VereadoresController::class, 'update'])->name('videowall.vereadores.update');
-    
+    // Fim Área do videowall ................................................................................................................
+
+    // Área Slides
+    Route::get('/slides', [SlidesController::class, 'index'])->name('slides.index');
 });
 
 
