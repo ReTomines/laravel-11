@@ -25,13 +25,13 @@
             >
             <li class="nav-header">PAINEL DE CONTROLE</li>
               <li class="nav-item">
-                <a href="{{ route('videowall.index') }}" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="nav-icon bi bi-tv "></i>
                   <p>Video Wall</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('videowall.index') }}" class="nav-link">
                   <i class="nav-icon bi bi-card-text "></i>
                   <p>Cadastros</p>
                 </a>

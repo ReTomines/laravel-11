@@ -3,7 +3,7 @@
 @endphp
 
 @extends('layouts.default')
-@section('page-title', 'VideoWall')
+@section('page-title', 'Cadastrar Dados')
 
 @section('page-actions')
 
