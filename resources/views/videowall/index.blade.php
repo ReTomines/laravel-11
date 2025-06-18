@@ -11,7 +11,7 @@
         $activeTab = session('active_tab', request('tab', 'vereadores')); 
     @endphp
 
-    <a href="{{ route('videowall.create', ['tab' => $activeTab]) }}" class="btn btn-primary btn-sm">Adicionar</a>
+    <a href="#" id="btnAdicionar" class="btn btn-primary btn-sm">Adicionar</a>
 
 @endsection
 
@@ -55,7 +55,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link {{ $activeTab == 'partidos' ? 'active' : '' }}" id="partidos-tab" id="partidos-tab" data-bs-toggle="tab" href="#partidos" role="tab" aria-controls="partidos" aria-selected="false">Partidos</a>
+                <a class="nav-link {{ $activeTab == 'partidos' ? 'active' : '' }}" id="partidos-tab" data-bs-toggle="tab" href="#partidos" role="tab" aria-controls="partidos" aria-selected="false">Partidos</a>
             </li>
 
         </ul>

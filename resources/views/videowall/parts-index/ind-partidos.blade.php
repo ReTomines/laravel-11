@@ -33,11 +33,20 @@
                         @method('DELETE')
 
                         @can('edit', $partido)     
-                            <a href="{{ route('videowall.partidos.edit', $partido->id) }}" class="btn btn-primary btn-sm">Editar</a>
+                            <a href="{{ route('videowall.partidos.edit', $partido->id) }}"
+                               class="btn btn-sm btn-outline-primary"
+                               title="Editar">
+                               <i class="bi bi-pencil-square"></i>
+                            </a>
                         @endcan
 
                         @can('destroy', $partido)
-                            <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                            <button type="submit" 
+                                    class="btn btn-sm btn-outline-danger"
+                                    title="Excluir"
+                                    onclick="return confirm('Tem certeza que deseja excluir?')">
+                                <i class="bi bi-trash"></i>
+                            </button>
                         @endcan
                     </form>
                 </td>

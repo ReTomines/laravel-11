@@ -52,7 +52,8 @@
             
             <div class="col-12">
                 <button type="submit" class="btn btn-primary">Atualizar</button>
-                <a href="{{ url()->previous() }}" class="btn btn-secondary">Cancelar</a>
+                <a href="{{ route('videowall.index', ['tab' => 'partidos']) }}" class="btn btn-secondary">Cancelar</a>
+
             </div>
         </form>
     </div>

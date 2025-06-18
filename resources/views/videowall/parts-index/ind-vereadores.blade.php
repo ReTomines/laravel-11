@@ -23,7 +23,7 @@
                         alt="Logo do Partido"
                         style="width: auto; height: 36px; object-fit: contain;">
                 </td>
-                <td> {{ $vereador->pavimento }} </td>
+                <td> {{ $vereador->localization->nome ?? 'N/D' }} </td>
                 <td> {{ $vereador->sala }} </td>
                 <td>
                     <form action="{{ route('videowall.vereadores.destroy', $vereador->id) }}" method="POST">
@@ -31,11 +31,20 @@
                         @method('DELETE')
 
                         @can('edit', $vereador)     
-                            <a href="{{ route('videowall.vereadores.edit', $vereador->id) }}" class="btn btn-primary btn-sm">Editar</a>
+                            <a href="{{ route('videowall.vereadores.edit', $vereador->id) }}" 
+                               class="btn btn-sm btn-outline-primary"
+                               title="Editar">
+                               <i class="bi bi-pencil-square"></i>
+                            </a>
                         @endcan    
 
                         @can('destroy', $vereador)
-                            <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                            <button type="submit" 
+                                    class="btn btn-sm btn-outline-danger"
+                                    title="Excluir"
+                                    onclick="return confirm('Tem certeza que deseja excluir?')">
+                                <i class="bi bi-trash"></i>
+                            </button>
                         @endcan
                     </form>
                 </td>

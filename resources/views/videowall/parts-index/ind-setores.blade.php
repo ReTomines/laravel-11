@@ -17,7 +17,7 @@
             <tr>
                 <th scope="row"> {{ $setor->id }} </th>
                 <td> {{ $setor->nome_setor }} </td>
-                <td> {{ $setor->pavimento }} </td>
+                <td> {{ $setor->localization->nome ?? 'N/D' }} </td>
                 <td>
                     <img src="{{ asset('storage/' . $setor->icone) }}"
                         alt="Icone"
@@ -30,11 +30,20 @@
                         @method('DELETE')
                         
                         @can('edit', $setor)     
-                            <a href="{{ route('videowall.setores.edit', $setor->id) }}" class="btn btn-primary btn-sm">Editar</a>
+                            <a href="{{ route('videowall.setores.edit', $setor->id) }}" 
+                               class="btn btn-sm btn-outline-primary"
+                               title="Editar">
+                               <i class="bi bi-pencil-square"></i>
+                            </a>
                         @endcan   
 
                         @can('destroy', $setor)
-                            <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                            <button type="submit" 
+                                    class="btn btn-sm btn-outline-danger"
+                                    title="Excluir"
+                                    onclick="return confirm('Tem certeza que deseja excluir?')">
+                                <i class="bi bi-trash"></i>
+                            </button>
                         @endcan
                     </form>                    
                 </td>

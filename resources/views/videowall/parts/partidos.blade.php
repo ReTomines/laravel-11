@@ -33,6 +33,7 @@
                 
                 <div class="form-check">
                     <button type="submit" class="btn btn-primary">Criar</button>
+                    <a href="{{ route('videowall.index', ['tab' => 'partidos']) }}" class="btn btn-secondary">Cancelar</a>
                 </div>
         </form>
     </div>

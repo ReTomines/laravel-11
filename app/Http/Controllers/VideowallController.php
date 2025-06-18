@@ -28,7 +28,20 @@ class VideowallController extends Controller
         $partidos = Partidos::orderBy('nome_partido', 'asc')->get();
         $activeTab = request('tab', 'vereadores'); // valor da URL
         //dd($pavimentos);
-        return view('videowall.create', compact('pavimentos', 'partidos', 'activeTab'));
+        
+        // Define flags com base na aba ativa
+        $data = compact('pavimentos', 'partidos', 'activeTab');
+        if ($activeTab === 'vereadores') {
+            $data['vereador'] = true;
+        } elseif ($activeTab === 'setores') {
+            $data['setor'] = true;
+        } elseif ($activeTab === 'partidos') {
+            $data['partido'] = true;
+        }
+
+    return view('videowall.create', $data);
+        
+        //return view('videowall.create', compact('pavimentos', 'partidos', 'activeTab'));
     }
 
     // Deletar ...........................................

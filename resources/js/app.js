@@ -7,3 +7,4 @@ import 'bootstrap';
 import 'admin-lte';
 import './overlayscrollbars.js';
 import './logoDinamico.js';
+import './abaDinamica.js';
