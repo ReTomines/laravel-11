@@ -9,3 +9,4 @@ import './overlayscrollbars.js';
 import './logoDinamico.js';
 import './abaDinamica.js';
 import './slide.js';
+import './slide-cards.js';
