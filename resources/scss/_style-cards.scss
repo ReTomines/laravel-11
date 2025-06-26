@@ -19,3 +19,12 @@
     background-size: 1273px 91px;
     background-repeat: no-repeat;
 }
+
+.cards {
+    background-size: 1273px 91px;
+    background-repeat: no-repeat;
+    
+    &:nth-child(1) { background-image: url('./../images/cards/card-1.png'); }
+    &:nth-child(2) { background-image: url('./../images/cards/card-2.png'); }
+    /* Adicione mais conforme necessário */
+}
