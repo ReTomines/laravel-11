@@ -11,9 +11,10 @@
 
     <div class="card-body">
         <form action="{{ route('videowall.vereadores.store') }}" method="post" class="row g-4" enctype="multipart/form-data">
-            @csrf            
+            @csrf          
+
                 <!-- Nome político -->
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <label class="form-label fw-bold">Nome político</label>
                     <input type="text" 
                            name="nome_politico"
@@ -23,6 +24,12 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
+
+                <!-- Foto vereador -->
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Foto vereador</label>
+                    <input class="form-control" type="file" name="foto_ver">
+                </div>        
 
                 <!-- Título -->
                 <div class="col-md-4">

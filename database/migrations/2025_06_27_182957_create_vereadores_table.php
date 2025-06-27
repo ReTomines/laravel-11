@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('vereadores', function (Blueprint $table) {
             $table->id();
-            $table->enum('titulo', ['vereador', 'vereadora']);
             $table->string('nome_politico');
+            $table->string('foto_ver');
+            $table->enum('titulo', ['vereador', 'vereadora']);
             $table->string('abrev_titulo')->nullable();
-            $table->string('logo_partido')->nullable(); // caso o logo seja opcional
             $table->unsignedBigInteger('pavimento');
             $table->string('sala');
+            $table->string('logo_partido')->nullable(); // caso o logo seja opcional
 
             // Novo campo partido_id com chave estrangeira
             $table->unsignedBigInteger('partido_id')->nullable();

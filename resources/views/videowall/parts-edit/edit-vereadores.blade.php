@@ -21,7 +21,7 @@
             @method('PUT')
 
                 <!-- Nome político -->
-                <div class="col-md-12">
+                <div class="col-md-4">
                     <label class="form-label fw-bold">Nome político</label>
                     <input type="text" 
                            name="nome_politico"
@@ -31,6 +31,23 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
+
+                <!-- Foto vereador -->
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Foto vereador</label>
+                    <input class="form-control @error('foto_ver') is-invalid @enderror" 
+                    type="file" 
+                    name="foto_ver">
+                    @error('foto_ver')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div> 
+                @if($vereador->foto_ver)
+                    <div class="col-md-2 mt-2">
+                        <small>Foto atual:</small><br>
+                        <img src="{{ asset('storage/' . $vereador->foto_ver) }}" alt="Foto do vereador" style="max-height: 50px;">
+                    </div>
+                @endif
 
                 <!-- Título -->
                 <div class="col-md-4">

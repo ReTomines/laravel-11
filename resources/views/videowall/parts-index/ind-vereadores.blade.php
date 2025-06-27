@@ -4,6 +4,7 @@
         <tr>
         <th scope="col">#</th>
         <th scope="col">Vereador</th>
+        <th scope="col">Foto</th>
         <th scope="col">Partido</th>
         <th scope="col">Pavimento</th>
         <th scope="col">Sala</th>
@@ -18,13 +19,23 @@
             <tr>
                 <th scope="row">{{ $vereador->id }}</th>
                 <td> {{ $vereador->nome_politico }} </td>
+                
+                <td>
+                    <img src="{{ asset('storage/' . $vereador->foto_ver) }}"
+                         alt="Foto vereador"
+                         style="width: auto; height: 36px; object-fit: contain;">
+                </td>
+
                 <td>
                     <img src="{{ asset('storage/' . $vereador->logo_partido) }}"
                         alt="Logo do Partido"
                         style="width: auto; height: 36px; object-fit: contain;">
                 </td>
+
                 <td> {{ $vereador->localization->nome ?? 'N/D' }} </td>
+
                 <td> {{ $vereador->sala }} </td>
+
                 <td>
                     <form action="{{ route('videowall.vereadores.destroy', $vereador->id) }}" method="POST">
                         @csrf
@@ -48,6 +59,7 @@
                         @endcan
                     </form>
                 </td>
+
             </tr>
         @endforeach
     </tbody>

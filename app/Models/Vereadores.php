@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Vereadores extends Model
 {
     protected $fillable = [
-        'titulo', 'abrev_titulo', 'nome_politico', 'logo_partido', 'pavimento', 'sala', 'partido_id'
+         'partido_id', 'nome_politico', 'foto_ver', 'titulo', 'abrev_titulo', 'pavimento', 'sala', 'logo_partido'
     ];
 
     public function partido()
@@ -18,5 +18,14 @@ class Vereadores extends Model
     public function localization()
     {
         return $this->belongsTo(Localizations::class, 'pavimento');
+    }
+
+    protected static function booted()
+    {
+        static::deleting(function ($vereador) {
+            if (!empty($vereador->foto_ver) && Storage::disk('public')->exists($vereador->foto_ver)) {
+                Storage::disk('public')->delete($vereador->foto_ver);
+            }
+        });
     }
 }

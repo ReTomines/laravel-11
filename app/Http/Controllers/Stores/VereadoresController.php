@@ -14,6 +14,7 @@ class VereadoresController extends Controller
     {
         $input = $request->validate([
             'nome_politico' => 'required|string|max:255',
+            'foto_ver' => 'required|file|image|max:2048',
             'titulo' => 'required|in:vereador,vereadora',
             'abrev_titulo' => 'nullable|string',
             'pavimento' => 'required|exists:localizations,id',
@@ -40,6 +41,11 @@ class VereadoresController extends Controller
             }
         }
 
+        // Armazena o foto vereador ------
+        $fotoPath = $request->file('foto_ver')->store('fotos', 'public');
+        $input['foto_ver'] = $fotoPath;
+        // fim do armazena o foto --------
+
         // Cria o vereador
         Vereadores::create($input);
 
@@ -65,6 +71,7 @@ class VereadoresController extends Controller
     {
         $input = $request->validate([
             'nome_politico' => 'required|string|max:255',
+            'foto_ver' => 'required|file|image|max:2048',
             'titulo' => 'required|in:vereador,vereadora',
             'abrev_titulo' => 'nullable|string',
             'pavimento' => 'required|exists:localizations,id',
@@ -86,6 +93,27 @@ class VereadoresController extends Controller
 
         // Atualiza o vereador com os dados válidos
         $vereador->update($input);
+
+
+        // Armazena o foto anterior antes de apagá-lo ---------
+        $oldFoto = $vereador->foto_ver;
+
+        // Se houver uma nova foto, atualiza e remove a antiga
+        if ($request->hasFile('foto_ver')) {
+            // Deleta foto anterior
+            if ($oldFoto && Storage::disk('public')->exists($oldFoto)){
+                Storage::disk('public')->delete($oldFoto);
+            }
+
+             // Salva nova foto
+             $newFotoPath = $request->file('foto_ver')->store('fotos', 'public');
+             $input['logo'] = $newFotoPath;
+ 
+        } else {
+            unset($input['foto_ver']);
+        }
+        // fim do armazena foto -------------------------------
+
 
         // Atualiza o partido, se necessário
         if (!empty($input['partido'])) {
