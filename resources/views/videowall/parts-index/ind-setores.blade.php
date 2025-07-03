@@ -49,6 +49,6 @@
                 </td>
             </tr>
         @endforeach
-    </tbody>
-    
+    </tbody>  
 </table>
+{{ $setores->appends(['tab' => 'setores'])->links() }}

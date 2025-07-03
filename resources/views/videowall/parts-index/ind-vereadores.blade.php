@@ -63,5 +63,5 @@
             </tr>
         @endforeach
     </tbody>
-    
 </table>
+{{ $vereadores->appends(['tab' => 'vereadores'])->links() }}

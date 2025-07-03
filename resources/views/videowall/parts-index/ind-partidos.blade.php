@@ -53,5 +53,5 @@
             </tr>
         @endforeach
     </tbody>
-    
 </table>
+{{ $partidos->appends(['tab' => 'partidos'])->links() }}

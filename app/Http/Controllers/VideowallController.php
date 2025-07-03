@@ -14,9 +14,9 @@ class VideowallController extends Controller
 
     public function index()
     {
-        $vereadores = Vereadores::with('localization')->get();
-        $setores = Setores::with('localization')->get();
-        $partidos = Partidos::get();
+        $vereadores = Vereadores::with('localization')->paginate(10);
+        $setores = Setores::with('localization')->paginate(10);
+        $partidos = Partidos::paginate(10);
 
         return view('videowall.index', compact('vereadores', 'setores', 'partidos'));
     }
