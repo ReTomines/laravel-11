@@ -12,11 +12,25 @@ class VideowallController extends Controller
 {
     use AuthorizesRequests, DestroyableTrait;
 
-    public function index()
+    public function index(Request $request)
     {
-        $vereadores = Vereadores::with('localization')->paginate(10);
-        $setores = Setores::with('localization')->paginate(10);
-        $partidos = Partidos::paginate(10);
+        $vereadores = Vereadores::with('localization')->paginate(10, ['*'], 'vereadores_page');
+        $setores = Setores::with('localization')->paginate(10, ['*'], 'setores_page');
+        $partidos = Partidos::paginate(10, ['*'], 'partidos_page');
+    
+        // Detectar qual aba está ativa baseado nos parâmetros de paginação
+        $activeTab = 'vereadores'; // padrão
+        
+        if ($request->has('setores_page')) {
+            $activeTab = 'setores';
+        } elseif ($request->has('partidos_page')) {
+            $activeTab = 'partidos';
+        } elseif ($request->has('tab')) {
+            $activeTab = $request->get('tab');
+        }
+        
+        // Salvar aba ativa na sessão
+        session(['active_tab' => $activeTab]);    
 
         return view('videowall.index', compact('vereadores', 'setores', 'partidos'));
     }

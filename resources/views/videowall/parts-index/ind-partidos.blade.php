@@ -54,4 +54,4 @@
         @endforeach
     </tbody>
 </table>
-{{ $partidos->appends(['tab' => 'partidos'])->links() }}
+{{ $partidos->appends(request()->except(['vereadores_page', 'setores_page']))->appends(['tab' => 'partidos'])->links() }}
