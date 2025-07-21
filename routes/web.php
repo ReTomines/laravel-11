@@ -45,8 +45,6 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/videowall/vereadores/{vereador}', [VereadoresController::class, 'update'])->name('videowall.vereadores.update');
     // Fim Área do videowall ................................................................................................................
 
-    // Área Slides
-    Route::get('/slides', [SlidesController::class, 'index'])->name('slides.index');
 });
 
 
