@@ -24,20 +24,13 @@
               data-accordion="false"
             >
             <li class="nav-header">PAINEL DE CONTROLE</li>
-              <li class="nav-item">
-                <a href="{{ route('slides.index') }}" class="nav-link">
-                  <i class="nav-icon bi bi-tv "></i>
-                  <p>Video Wall</p>
-                </a>
-              </li>
+              
               <li class="nav-item">
                 <a href="{{ route('videowall.index') }}" class="nav-link">
                   <i class="nav-icon bi bi-card-text "></i>
                   <p>Cadastros</p>
                 </a>
-              </li>
-
-              
+              </li>            
 
               <!-- li class="nav-header">DOCUMENTATIONS
               <li class="nav-item">

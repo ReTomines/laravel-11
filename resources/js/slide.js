@@ -6,13 +6,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
     btnAddSlide.addEventListener('click', function (e) {
         e.preventDefault();
+        
+        // Clonar o template
         const clone = template.content.cloneNode(true);
+        
+        // Adicionar ao container
         container.appendChild(clone);
 
-        // Ocultar placeholder se existir
+        // Ocultar placeholder
         if (placeholder) {
             placeholder.style.display = 'none';
         }
+
+        // Disparar evento personalizado para notificar que um novo slide foi adicionado
+        const event = new CustomEvent('slideAdded', {
+            detail: { slide: container.lastElementChild }
+        });
+        document.dispatchEvent(event);
 
         attachRemoveHandlers();
     });
@@ -25,8 +35,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     const slideBlock = this.closest('.position-relative');
                     slideBlock.remove();
 
-                    // Se não houver mais slides, mostra o placeholder
-                    if (container.querySelectorAll('.position-relative').length === 0 && placeholder) {
+                    // Mostrar placeholder se não houver mais slides
+                    if (container.querySelectorAll('.slide-container').length === 0 && placeholder) {
                         placeholder.style.display = 'block';
                     }
                 }

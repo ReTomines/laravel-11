@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Configurações dos cards
     const cardConfig = {
         count: 6,
         baseMarginTop: 126,
@@ -7,15 +6,14 @@ document.addEventListener('DOMContentLoaded', function() {
         classes: 'cards fundo position-absolute start-50 translate-middle-x w-100 ms-1'
     };
 
-    // Função principal para criar cards
     function createCardsForSlide(slideContainer) {
         if (!slideContainer) return;
 
-        // Remove cards existentes para evitar duplicação
+        // Limpar cards existentes
         const existingCards = slideContainer.querySelectorAll('.cards');
         existingCards.forEach(card => card.remove());
 
-        // Cria novos cards
+        // Criar novos cards
         for (let i = 0; i < cardConfig.count; i++) {
             const card = document.createElement('div');
             card.className = cardConfig.classes;
@@ -26,48 +24,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Verifica se um elemento é um container de slide
-    function isSlideContainer(element) {
-        return element.classList.contains('bg-black') && 
-               element.style.width === '1280px' && 
-               element.style.height === '720px';
-    }
-
-    // Inicializa todos os slides existentes
-    function initializeExistingSlides() {
-        document.querySelectorAll('.bg-black').forEach(container => {
-            if (isSlideContainer(container)) {
-                createCardsForSlide(container);
-            }
-        });
-    }
-
-    // Observador para novos slides adicionados dinamicamente
-    const slidesObserver = new MutationObserver(function(mutations) {
-        mutations.forEach(mutation => {
-            mutation.addedNodes.forEach(node => {
-                if (node.nodeType === 1) {
-                    const potentialSlides = node.querySelectorAll ? node.querySelectorAll('.bg-black') : [];
-                    potentialSlides.forEach(slide => {
-                        if (isSlideContainer(slide)) {
-                            createCardsForSlide(slide);
-                        }
-                    });
-                    
-                    if (isSlideContainer(node)) {
-                        createCardsForSlide(node);
-                    }
-                }
-            });
-        });
+    // Ouvinte para novos slides
+    document.addEventListener('slideAdded', function(e) {
+        const slideContainer = e.detail.slide.querySelector('.bg-black');
+        if (slideContainer) {
+            createCardsForSlide(slideContainer);
+        }
     });
 
-    // Inicia a observação
-    slidesObserver.observe(document.body, {
-        childList: true,
-        subtree: true
+    // Inicializar slides existentes
+    document.querySelectorAll('.bg-black').forEach(container => {
+        createCardsForSlide(container);
     });
-
-    // Processa slides iniciais
-    initializeExistingSlides();
 });
