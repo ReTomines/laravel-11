@@ -47,5 +47,6 @@ Route::middleware(['auth'])->group(function () {
 
     // Área Slides
     Route::get('/slides', [SlidesController::class, 'index'])->name('slides.index');
+    Route::get('/slides/generate', [SlidesController::class, 'generateSlides'])->name('slides.generate');
 
 });
