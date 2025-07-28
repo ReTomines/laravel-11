@@ -27,32 +27,33 @@
                 </div>
             </div>
             
-            <div id="preview-container" class="bg-light p-3" style="min-height: 500px; border: 1px dashed #ccc;">
-                @if(isset($vereadores) && count($vereadores))
-                    @foreach($vereadores->groupBy('pavimento') as $pavimento => $vereadoresPav)
-                        <h4>{{ $pavimento }}º PAVIMENTO</h4>
-                        <div class="row">
-                            @foreach($vereadoresPav as $vereador)
-                                <div class="col-md-3 mb-3">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{ $vereador->titulo }} {{ $vereador->nome_politico }}</h5>
-                                            <p class="card-text">
-                                                <small class="text-muted">{{ $vereador->partido->nome ?? 'Sem partido' }}</small><br>
-                                                <small>GAB: {{ $vereador->sala }}</small>
-                                            </p>
+                <div id="preview-container" class="bg-light p-3" style="min-height: 500px; border: 1px dashed #ccc;">
+                    @if(isset($vereadores) && count($vereadores))
+                        @foreach($vereadores->groupBy('localization.nome') as $localizacao => $vereadoresLoc)
+                            <h4 class="localizacao-title">{{ $localizacao }}</h4>
+                            <div class="row">
+                                @foreach($vereadoresLoc as $vereador)
+                                    <div class="col-md-3 mb-3">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{ $vereador->titulo }} {{ $vereador->nome_politico }}</h5>
+                                                <p class="card-text">
+                                                    <small class="text-muted">{{ $vereador->partido->nome ?? 'Sem partido' }}</small><br>
+                                                    <small>GAB: {{ $vereador->sala }}</small>
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            </div>
+                        @endforeach
+                    @else
+                        <div class="text-center text-muted py-5">
+                            Nenhum vereador cadastrado.
                         </div>
-                    @endforeach
-                @else
-                    <div class="text-center text-muted py-5">
-                        Nenhum vereador cadastrado.
-                    </div>
-                @endif
-            </div>
+                    @endif
+                </div>
+            
         </div>
     </div>
 @endsection

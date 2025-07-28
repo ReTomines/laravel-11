@@ -20,26 +20,36 @@ class SlidesController extends Controller
     
     public function generateSlides(Request $request)
     {
-        // Obter dados dos vereadores e setores agrupados por pavimento
-        $vereadoresPorPavimento = Vereadores::with(['partido', 'localization'])
-            ->orderBy('pavimento')
-            ->orderBy('sala')
+        // Obter dados dos vereadores e setores com os nomes das localizações
+        $vereadoresPorLocalizacao = Vereadores::with(['partido', 'localization'])
             ->get()
-            ->groupBy('pavimento');
+            ->groupBy(function($item) {
+                return $item->localization->nome;
+            });
             
-        $setoresPorPavimento = Setores::with('localization')
-            ->orderBy('pavimento')
-            ->orderBy('sala')
+        $setoresPorLocalizacao = Setores::with('localization')
             ->get()
-            ->groupBy('pavimento');
+            ->groupBy(function($item) {
+                return $item->localization->nome;
+            });
             
-        // Gerar HTML para os slides
-        $html = view('slides.template', compact('vereadoresPorPavimento', 'setoresPorPavimento'))->render();
+        // Ordenar os grupos de forma específica (opcional)
+        $order = [
+            '1º PAVIMENTO', '2º PAVIMENTO', '3º PAVIMENTO', '4º PAVIMENTO', 
+            '5º PAVIMENTO', '6º PAVIMENTO', '7º PAVIMENTO', '8º PAVIMENTO',
+            '9º PAVIMENTO', '10º PAVIMENTO', 'PALÁCIO', 'SUBSOLO'
+        ];
         
-        // Opção 1: Retornar como HTML (para exibição no navegador)
-        if ($request->input('format') === 'html') {
-            return $html;
-        }
+        $vereadoresPorLocalizacao = $vereadoresPorLocalizacao->sortBy(function($item, $key) use ($order) {
+            return array_search($key, $order);
+        });
+        
+        $setoresPorLocalizacao = $setoresPorLocalizacao->sortBy(function($item, $key) use ($order) {
+            return array_search($key, $order);
+        });
+        
+        // Gerar HTML para os slides
+        $html = view('slides.template', compact('vereadoresPorLocalizacao', 'setoresPorLocalizacao'))->render();
         
         // Opção 2: Gerar PDF
         $pdf = Pdf::loadHTML($html);
