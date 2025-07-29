@@ -12,10 +12,60 @@ class SlidesController extends Controller
 {
     public function index()
     {
-        $vereadores = Vereadores::with(['partido', 'localization'])->get();
-        $setores = Setores::with('localization')->get();
+        $vereadores = Vereadores::with(['partido', 'localization'])
+            ->orderBy('pavimento')
+            ->get();
         
-        return view('slides.index', compact('vereadores', 'setores'));
+        $setores = Setores::with('localization')
+            ->orderBy('pavimento')
+            ->get();
+        
+        // Agrupar por pavimento e ordenar
+        $vereadoresPorLocalizacao = $vereadores->groupBy(function($item) {
+            return $item->localization->nome;
+        });
+        
+        $setoresPorLocalizacao = $setores->groupBy(function($item) {
+            return $item->localization->nome;
+        });
+        
+        // Ordenar os pavimentos (exceto Palácio)
+        $order = [
+            '3º PAVIMENTO', '4º PAVIMENTO', '5º PAVIMENTO', '6º PAVIMENTO',
+            '7º PAVIMENTO', '8º PAVIMENTO', '9º PAVIMENTO', '10º PAVIMENTO',
+            'PALÁCIO'
+        ];
+        
+        $vereadoresPorLocalizacao = $vereadoresPorLocalizacao->sortBy(function($item, $key) use ($order) {
+            return array_search($key, $order);
+        });
+        
+        $setoresPorLocalizacao = $setoresPorLocalizacao->sortBy(function($item, $key) use ($order) {
+            return array_search($key, $order);
+        });
+        
+        // Dividir em grupos de 2 pavimentos por slide
+        $vereadoresGrouped = collect([]);
+        $tempGroup = collect([]);
+        $count = 0;
+        
+        foreach ($vereadoresPorLocalizacao as $localizacao => $vereadores) {
+            $tempGroup->put($localizacao, $vereadores);
+            $count++;
+            
+            if ($count == 2 || $localizacao == 'PALÁCIO') {
+                $vereadoresGrouped->push($tempGroup);
+                $tempGroup = collect([]);
+                $count = 0;
+            }
+        }
+        
+        // Se sobrar algum pavimento não agrupado
+        if ($tempGroup->count() > 0) {
+            $vereadoresGrouped->push($tempGroup);
+        }
+        
+        return view('slides.index', compact('vereadoresGrouped', 'setoresPorLocalizacao'));
     }
     
     public function generateSlides(Request $request)

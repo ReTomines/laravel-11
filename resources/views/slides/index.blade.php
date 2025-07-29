@@ -21,39 +21,46 @@
                     </a>
                 </div>
                 <div class="col-md-6">
-                    <a href="{{ route('slides.generate', ['format' => 'pdf']) }}" class="btn btn-danger">
+                    <a href="{{ route('slides.generate', ['format' => 'pdf']) }}" class="btn btn-danger" target="_blank">
                         <i class="fas fa-file-pdf"></i> Baixar PDF
                     </a>
                 </div>
             </div>
             
-                <div id="preview-container" class="bg-light p-3" style="min-height: 500px; border: 1px dashed #ccc;">
-                    @if(isset($vereadores) && count($vereadores))
-                        @foreach($vereadores->groupBy('localization.nome') as $localizacao => $vereadoresLoc)
-                            <h4 class="localizacao-title">{{ $localizacao }}</h4>
-                            <div class="row">
-                                @foreach($vereadoresLoc as $vereador)
-                                    <div class="col-md-3 mb-3">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title">{{ $vereador->titulo }} {{ $vereador->nome_politico }}</h5>
-                                                <p class="card-text">
-                                                    <small class="text-muted">{{ $vereador->partido->nome ?? 'Sem partido' }}</small><br>
-                                                    <small>GAB: {{ $vereador->sala }}</small>
-                                                </p>
-                                            </div>
+            <div id="preview-container" class="bg-light p-3" style="min-height: 500px; border: 1px dashed #ccc;">
+                @if(isset($vereadoresGrouped) && count($vereadoresGrouped))
+                    @foreach($vereadoresGrouped as $slideGroup)
+                        <div style="margin-bottom: 40px; border: 1px solid #999; padding: 15px;">
+                            <h4 style="text-align: center; background: #333; color: white; padding: 10px;">
+                                EDIFÍCIO GENERAL EURICO GASPAR DUTRA (EDIFÍCIO ANEXO)
+                            </h4>
+                            
+                            <div style="display: flex;">
+                                @foreach($slideGroup as $localizacao => $vereadores)
+                                    <div style="flex: 1; padding: 0 10px;">
+                                        <h5 class="localizacao-title">{{ $localizacao }}</h5>
+                                        <div style="display: flex; flex-wrap: wrap;">
+                                            @foreach($vereadores as $vereador)
+                                                <div style="width: 50%; padding: 5px;">
+                                                    <div style="border: 1px solid #ddd; padding: 10px;">
+                                                        <strong>{{ $vereador->titulo }} {{ $vereador->nome_politico }}</strong><br>
+                                                        <small>{{ $vereador->partido->nome ?? 'Sem partido' }}</small><br>
+                                                        <small>GAB: {{ $vereador->sala }}</small>
+                                                    </div>
+                                                </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 @endforeach
                             </div>
-                        @endforeach
-                    @else
-                        <div class="text-center text-muted py-5">
-                            Nenhum vereador cadastrado.
                         </div>
-                    @endif
-                </div>
-            
+                    @endforeach
+                @else
+                    <div class="text-center text-muted py-5">
+                        Nenhum vereador cadastrado.
+                    </div>
+                @endif
+            </div>
         </div>
     </div>
 @endsection
