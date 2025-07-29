@@ -28,7 +28,7 @@
             </div>
             
             <div id="preview-container" class="bg-light p-3" style="min-height: 500px; border: 1px dashed #ccc;">
-                @if(isset($vereadoresGrouped) && count($vereadoresGrouped))
+                @if(isset($vereadoresGrouped) && $vereadoresGrouped->count() > 0)
                     @foreach($vereadoresGrouped as $slideGroup)
                         <div style="margin-bottom: 40px; border: 1px solid #999; padding: 15px;">
                             <h4 style="text-align: center; background: #333; color: white; padding: 10px;">
@@ -59,7 +59,8 @@
                     <div class="text-center text-muted py-5">
                         Nenhum vereador cadastrado.
                     </div>
-                @endif
+                @endif    
+
             </div>
         </div>
     </div>
