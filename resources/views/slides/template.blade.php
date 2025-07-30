@@ -77,7 +77,9 @@
                         @foreach($vereadores as $vereador)
                             <div class="vereador-card">
                                 <div class="vereador-titulo">{{ strtoupper($vereador->titulo) }}</div>
-                                <div class="vereador-nome">{{ $vereador->nome_politico }}</div>
+                                <div class="vereador-nome">
+                                    {{ $vereador->nome_politico == 'VAGO' ? 'VAGO' : $vereador->nome_politico }}
+                                </div>
                                 <div class="vereador-partido">{{ $vereador->partido->nome ?? 'Sem partido' }}</div>
                                 <div class="gabinete">GAB: {{ $vereador->sala }}</div>
                             </div>

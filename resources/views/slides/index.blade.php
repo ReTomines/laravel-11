@@ -43,7 +43,9 @@
                                         <div style="display: flex; flex-direction: column; gap: 10px;">
                                             @foreach($vereadores as $vereador)
                                                 <div style="border: 1px solid #ddd; padding: 10px;">
-                                                    <strong>{{ $vereador->titulo }} {{ $vereador->nome_politico }}</strong><br>
+                                                    <strong>{{ $vereador->titulo }} 
+                                                        {{ $vereador->nome_politico == 'VAGO' ? 'VAGO' : $vereador->nome_politico }}
+                                                    </strong><br>
                                                     <small>{{ $vereador->partido->nome ?? 'Sem partido' }}</small><br>
                                                     <small>GAB: {{ $vereador->sala }}</small>
                                                 </div>
