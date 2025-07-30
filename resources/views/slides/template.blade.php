@@ -25,10 +25,12 @@
             display: flex;
             flex: 1;
             padding: 20px;
+            gap: 20px;
         }
-        .column {
+        .pavimento-column {
             flex: 1;
-            padding: 0 10px;
+            display: flex;
+            flex-direction: column;
         }
         .localizacao-title {
             font-size: 20px;
@@ -38,17 +40,11 @@
             padding: 5px 10px;
             text-transform: uppercase;
         }
-        .vereador-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
         .vereador-card {
             border: 1px solid #ccc;
             border-radius: 5px;
             padding: 10px;
-            width: calc(50% - 20px);
-            box-sizing: border-box;
+            margin-bottom: 10px;
         }
         .vereador-titulo {
             font-weight: bold;
@@ -75,30 +71,26 @@
             
             <div class="slide-content">
                 @foreach($slideGroup as $localizacao => $vereadores)
-                    <div class="column">
+                    <div class="pavimento-column">
                         <div class="localizacao-title">{{ $localizacao }}</div>
                         
-                        <div class="vereador-container">
-                            @foreach($vereadores as $vereador)
-                                <div class="vereador-card">
-                                    <div class="vereador-titulo">{{ strtoupper($vereador->titulo) }}</div>
-                                    <div class="vereador-nome">{{ $vereador->nome_politico }}</div>
-                                    <div class="vereador-partido">{{ $vereador->partido->nome ?? 'Sem partido' }}</div>
-                                    <div class="gabinete">GAB: {{ $vereador->sala }}</div>
-                                </div>
-                            @endforeach
-                        </div>
+                        @foreach($vereadores as $vereador)
+                            <div class="vereador-card">
+                                <div class="vereador-titulo">{{ strtoupper($vereador->titulo) }}</div>
+                                <div class="vereador-nome">{{ $vereador->nome_politico }}</div>
+                                <div class="vereador-partido">{{ $vereador->partido->nome ?? 'Sem partido' }}</div>
+                                <div class="gabinete">GAB: {{ $vereador->sala }}</div>
+                            </div>
+                        @endforeach
                         
                         @if(isset($setoresPorLocalizacao[$localizacao]))
                             <div class="localizacao-title">SETORES - {{ $localizacao }}</div>
-                            <div class="vereador-container">
-                                @foreach($setoresPorLocalizacao[$localizacao] as $setor)
-                                    <div class="vereador-card">
-                                        <div class="vereador-nome">{{ $setor->nome_setor }}</div>
-                                        <div class="gabinete">SALA: {{ $setor->sala }}</div>
-                                    </div>
-                                @endforeach
-                            </div>
+                            @foreach($setoresPorLocalizacao[$localizacao] as $setor)
+                                <div class="vereador-card">
+                                    <div class="vereador-nome">{{ $setor->nome_setor }}</div>
+                                    <div class="gabinete">SALA: {{ $setor->sala }}</div>
+                                </div>
+                            @endforeach
                         @endif
                     </div>
                 @endforeach

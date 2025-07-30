@@ -14,6 +14,7 @@ class SlidesController extends Controller
     {
         $vereadores = Vereadores::with(['partido', 'localization'])
             ->orderBy('pavimento')
+            ->orderBy('sala')
             ->get();
         
         $setores = Setores::with('localization')
