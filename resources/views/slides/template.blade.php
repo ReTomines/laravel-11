@@ -2,65 +2,95 @@
 <html>
 <head>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .slide {
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-        .header {
-            background-color: #333;
-            color: white;
-            padding: 15px;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-        }
-        .slide-content {
-            display: flex;
-            flex: 1;
-            padding: 20px;
-            gap: 20px;
-        }
-        .pavimento-column {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .localizacao-title {
-            font-size: 20px;
-            font-weight: bold;
-            margin: 15px 0;
-            background-color: #ddd;
-            padding: 5px 10px;
-            text-transform: uppercase;
-        }
+        /* Estilos base mantidos */
         .vereador-card {
             border: 1px solid #ccc;
             border-radius: 5px;
             padding: 10px;
             margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            height: 100px;
+            position: relative; /* Para posicionamento absoluto do gabinete */
+        }
+        .vereador-foto {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ddd;
+        }
+        .vereador-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         .vereador-titulo {
             font-weight: bold;
             margin-bottom: 5px;
+            font-size: 14px;
+            color: #555;
         }
         .vereador-nome {
-            font-size: 16px;
+            font-size: 18px;
             margin-bottom: 5px;
+            font-weight: bold;
         }
         .vereador-partido {
-            color: #555;
-            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        .gabinete {
-            font-style: italic;
+        .partido-logo {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+        .gabinete-info {
+            position: absolute;
+            right: 15px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
             color: #777;
+        }
+        .vago-placeholder {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #ccc;
+            color: #999;
+            font-size: 12px;
+        }
+        .partido-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .partido-logo {
+            width: 40px;  /* Aumentado de 24px */
+            height: 40px; /* Aumentado de 24px */
+            object-fit: contain;
+        }
+        .gabinete-info .partido-logo {
+            width: 30px;  /* Aumentado de 16px */
+            height: 30px; /* Aumentado de 16px */
+        }
+        .vereador-card {
+            padding: 15px; /* Aumentado o padding */
+            gap: 20px;    /* Aumentado o espaçamento */
+            height: 120px; /* Aumentado a altura */
+        }
+        .vereador-foto {
+            width: 90px;  /* Aumentado de 80px */
+            height: 90px; /* Aumentado de 80px */
         }
     </style>
 </head>
@@ -76,24 +106,48 @@
                         
                         @foreach($vereadores as $vereador)
                             <div class="vereador-card">
-                                <div class="vereador-titulo">{{ strtoupper($vereador->titulo) }}</div>
-                                <div class="vereador-nome">
-                                    {{ $vereador->nome_politico == 'VAGO' ? 'VAGO' : $vereador->nome_politico }}
+                                @if($vereador->nome_politico == 'VAGO')
+                                    <div class="vago-placeholder">
+                                        <span>VAGO</span>
+                                    </div>
+                                @else
+                                    <img src="{{ asset('storage/' . $vereador->foto_ver) }}" 
+                                         alt="{{ $vereador->nome_politico }}" 
+                                         class="vereador-foto"
+                                         onerror="this.src='{{ asset('images/default-avatar.png') }}'">
+                                @endif
+                                
+                                <div class="vereador-info">
+                                    <div class="vereador-titulo">{{ strtoupper($vereador->titulo) }}</div>
+                                    <div class="vereador-nome">
+                                        {{ $vereador->nome_politico == 'VAGO' ? 'VAGO' : $vereador->nome_politico }}
+                                    </div>
+                                    
+                                    @if(isset($vereador->partido->nome) && $vereador->partido->nome != 'Sem partido')
+                                    <div class="partido-container">
+                                        @if(isset($vereador->partido->logo))
+                                            <img src="{{ asset('storage/' . $vereador->partido->logo) }}" 
+                                                 alt="{{ $vereador->partido->nome }}" 
+                                                 class="partido-logo"
+                                                 onerror="this.style.display='none'">
+                                        @endif
+                                        <span>{{ $vereador->partido->nome }}</span>
+                                    </div>
+                                    @endif
                                 </div>
-                                <div class="vereador-partido">{{ $vereador->partido->nome ?? 'Sem partido' }}</div>
-                                <div class="gabinete">GAB: {{ $vereador->sala }}</div>
+                                
+                                <div class="gabinete-info">
+                                    @if(isset($vereador->partido->logo) && $vereador->nome_politico != 'VAGO')
+                                        <img src="{{ asset('storage/' . $vereador->partido->logo) }}" 
+                                             alt="{{ $vereador->partido->nome }}" 
+                                             class="partido-logo"
+                                             style="width: 20px; height: 20px;"
+                                             onerror="this.style.display='none'">
+                                    @endif
+                                    <span>GAB. {{ $vereador->sala }}</span>
+                                </div>
                             </div>
                         @endforeach
-                        
-                        @if(isset($setoresPorLocalizacao[$localizacao]))
-                            <div class="localizacao-title">SETORES - {{ $localizacao }}</div>
-                            @foreach($setoresPorLocalizacao[$localizacao] as $setor)
-                                <div class="vereador-card">
-                                    <div class="vereador-nome">{{ $setor->nome_setor }}</div>
-                                    <div class="gabinete">SALA: {{ $setor->sala }}</div>
-                                </div>
-                            @endforeach
-                        @endif
                     </div>
                 @endforeach
             </div>

@@ -42,12 +42,44 @@
                                         <h5 class="localizacao-title">{{ $localizacao }}</h5>
                                         <div style="display: flex; flex-direction: column; gap: 10px;">
                                             @foreach($vereadores as $vereador)
-                                                <div style="border: 1px solid #ddd; padding: 10px;">
-                                                    <strong>{{ $vereador->titulo }} 
-                                                        {{ $vereador->nome_politico == 'VAGO' ? 'VAGO' : $vereador->nome_politico }}
-                                                    </strong><br>
-                                                    <small>{{ $vereador->partido->nome ?? 'Sem partido' }}</small><br>
-                                                    <small>GAB: {{ $vereador->sala }}</small>
+                                                <div style="border: 1px solid #ddd; padding: 15px; display: flex; align-items: center; gap: 20px; position: relative; height: 110px;">
+                                                    @if($vereador->nome_politico == 'VAGO')
+                                                        <div style="width: 60px; height: 60px; border-radius: 50%; background-color: #eee; display: flex; align-items: center; justify-content: center; border: 2px dashed #ccc; color: #999; font-size: 12px;">
+                                                            <span>VAGO</span>
+                                                        </div>
+                                                    @else
+                                                        <img src="{{ asset('storage/' . $vereador->foto_ver) }}" 
+                                                            alt="{{ $vereador->nome_politico }}" 
+                                                            style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid #ddd;"
+                                                            onerror="this.src='{{ asset('images/default-avatar.png') }}'">
+                                                    @endif
+                                                    
+                                                    <div style="flex: 1;">
+                                                        <div style="font-weight: bold; font-size: 13px; color: #555;">{{ strtoupper($vereador->titulo) }}</div>
+                                                        <div style="font-weight: bold; font-size: 16px;">{{ $vereador->nome_politico == 'VAGO' ? 'VAGO' : $vereador->nome_politico }}</div>
+                                                        
+                                                        @if(isset($vereador->partido->nome) && $vereador->partido->nome != 'Sem partido')
+                                                        <div style="display: flex; align-items: center; gap: 10px; margin-top: 8px;">
+                                                            @if(isset($vereador->partido->logo))
+                                                                <img src="{{ asset('storage/' . $vereador->partido->logo) }}" 
+                                                                    alt="{{ $vereador->partido->nome }}" 
+                                                                    style="width: 36px; height: 36px; object-fit: contain;"
+                                                                    onerror="this.style.display='none'">
+                                                            @endif
+                                                            <span>{{ $vereador->partido->nome }}</span>
+                                                        </div>
+                                                        @endif
+                                                    </div>
+                                                    
+                                                    <div style="position: absolute; right: 15px; display: flex; align-items: center; gap: 8px; font-size: 16px; color: #777;">
+                                                        @if(isset($vereador->partido->logo) && $vereador->nome_politico != 'VAGO')
+                                                            <img src="{{ asset('storage/' . $vereador->partido->logo) }}" 
+                                                                alt="{{ $vereador->partido->nome }}" 
+                                                                style="width: 28px; height: 28px; object-fit: contain;"
+                                                                onerror="this.style.display='none'">
+                                                        @endif
+                                                        <span>GAB. {{ $vereador->sala }}</span>
+                                                    </div>
                                                 </div>
                                             @endforeach
                                         </div>
