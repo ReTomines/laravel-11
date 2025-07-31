@@ -15,14 +15,12 @@
         
         <div class="card-body">
             <div class="row mb-3">
-                <div class="col-md-6">
+                <div class="col-md-12 text-center">
+                    <a href="{{ route('slides.generate', ['format' => 'pdf']) }}" class="btn btn-danger me-2" target="_blank">
+                        <i class="fas fa-file-pdf"></i> Baixar PDF
+                    </a>
                     <a href="{{ route('slides.generate', ['format' => 'html']) }}" class="btn btn-primary" target="_blank">
                         <i class="fas fa-eye"></i> Visualizar Slides
-                    </a>
-                </div>
-                <div class="col-md-6">
-                    <a href="{{ route('slides.generate', ['format' => 'pdf']) }}" class="btn btn-danger" target="_blank">
-                        <i class="fas fa-file-pdf"></i> Baixar PDF
                     </a>
                 </div>
             </div>
@@ -42,15 +40,15 @@
                                         <h5 class="localizacao-title">{{ $localizacao }}</h5>
                                         <div style="display: flex; flex-direction: column; gap: 10px;">
                                             @foreach($vereadores as $vereador)
-                                                <div style="border: 1px solid #ddd; padding: 15px; display: flex; align-items: center; gap: 20px; position: relative; height: 110px;">
+                                                <div style="border: 1px solid #ddd; padding: 15px; display: flex; align-items: center; gap: 20px; position: relative; height: 130px;">
                                                     @if($vereador->nome_politico == 'VAGO')
-                                                        <div style="width: 60px; height: 60px; border-radius: 50%; background-color: #eee; display: flex; align-items: center; justify-content: center; border: 2px dashed #ccc; color: #999; font-size: 12px;">
+                                                        <div style="width: 80px; height: 80px; border-radius: 50%; background-color: #eee; display: flex; align-items: center; justify-content: center; border: 2px dashed #ccc; color: #999; font-size: 14px;">
                                                             <span>VAGO</span>
                                                         </div>
                                                     @else
                                                         <img src="{{ asset('storage/' . $vereador->foto_ver) }}" 
                                                             alt="{{ $vereador->nome_politico }}" 
-                                                            style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid #ddd;"
+                                                            style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid #ddd;"
                                                             onerror="this.src='{{ asset('images/default-avatar.png') }}'">
                                                     @endif
                                                     
@@ -63,7 +61,7 @@
                                                             @if(isset($vereador->partido->logo))
                                                                 <img src="{{ asset('storage/' . $vereador->partido->logo) }}" 
                                                                     alt="{{ $vereador->partido->nome }}" 
-                                                                    style="width: 36px; height: 36px; object-fit: contain;"
+                                                                    style="width: 76px; height: 76px; object-fit: contain;"
                                                                     onerror="this.style.display='none'">
                                                             @endif
                                                             <span>{{ $vereador->partido->nome }}</span>
@@ -75,7 +73,7 @@
                                                         @if(isset($vereador->partido->logo) && $vereador->nome_politico != 'VAGO')
                                                             <img src="{{ asset('storage/' . $vereador->partido->logo) }}" 
                                                                 alt="{{ $vereador->partido->nome }}" 
-                                                                style="width: 28px; height: 28px; object-fit: contain;"
+                                                                style="width: 60px; height: 60px; object-fit: contain;"
                                                                 onerror="this.style.display='none'">
                                                         @endif
                                                         <span>GAB. {{ $vereador->sala }}</span>
