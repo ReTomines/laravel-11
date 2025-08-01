@@ -50,3 +50,4 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/slides/generate', [SlidesController::class, 'generateSlides'])->name('slides.generate');
 
 });
+

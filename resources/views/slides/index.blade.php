@@ -1,4 +1,4 @@
-﻿@extends('layouts.default')
+@extends('layouts.default')
 @section('page-title', 'Slides')
 
 @section('content')
@@ -19,8 +19,8 @@
                     <a href="{{ route('slides.generate', ['format' => 'pdf']) }}" class="btn btn-danger me-2" target="_blank">
                         <i class="fas fa-file-pdf"></i> Baixar PDF
                     </a>
-                    <a href="{{ route('slides.generate', ['format' => 'html']) }}" class="btn btn-primary" target="_blank">
-                        <i class="fas fa-eye"></i> Visualizar Slides
+                    <a href="{{ route('slides.generate', ['format' => 'pptx']) }}" class="btn btn-primary">
+                        <i class="fas fa-file-powerpoint"></i> Baixar PPTX
                     </a>
                 </div>
             </div>
