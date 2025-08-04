@@ -2,64 +2,109 @@
 <html>
 <head>
     <style>
-        /* Estilos base mantidos */
+        /* Estilos atualizados */
+        .slide {
+            margin-bottom: 30px;
+            border: 1px solid #e0e0e0;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        
+        .header {
+            text-align: center;
+            background-color: #333;
+            color: white;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+        
+        .slide-content {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .pavimento-column {
+            flex: 1;
+        }
+        
+        .localizacao-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #666; /* Tom de cinza médio para títulos de pavimento */
+            padding: 5px;
+            background-color: #f0f0f0; /* Fundo cinza claro */
+            border-radius: 4px;
+        }
+        
         .vereador-card {
-            border: 1px solid #ccc;
+            border: 1px solid #e0e0e0;
             border-radius: 5px;
             padding: 10px;
             margin-bottom: 10px;
             display: flex;
             align-items: center;
             gap: 15px;
-            height: 100px;
-            position: relative; /* Para posicionamento absoluto do gabinete */
+            height: 80px; /* Altura reduzida */
+            position: relative;
+            background-color: white;
         }
+        
         .vereador-foto {
-            width: 80px;
-            height: 80px;
+            width: 60px; /* Reduzido */
+            height: 60px; /* Reduzido */
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid #ddd;
         }
+        
         .vereador-info {
             flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
+        
         .vereador-titulo {
             font-weight: bold;
-            margin-bottom: 5px;
-            font-size: 14px;
-            color: #555;
+            margin-bottom: 3px;
+            font-size: 12px;
+            color: #888; /* Tom de cinza para títulos */
+            text-transform: uppercase;
         }
+        
         .vereador-nome {
-            font-size: 18px;
-            margin-bottom: 5px;
+            font-size: 16px;
+            margin-bottom: 3px;
             font-weight: bold;
+            color: #333;
         }
-        .vereador-partido {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        
+        .partido-info {
+            font-size: 13px;
+            color: #555;
+            margin-top: 2px;
         }
-        .partido-logo {
-            width: 24px;
-            height: 24px;
-            object-fit: contain;
-        }
+        
         .gabinete-info {
             position: absolute;
             right: 15px;
             display: flex;
             align-items: center;
             gap: 5px;
-            font-size: 14px;
+            font-size: 13px;
             color: #777;
+            background-color: #f5f5f5;
+            padding: 3px 8px;
+            border-radius: 12px;
         }
+        
         .vago-placeholder {
-            width: 80px;
-            height: 80px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             background-color: #eee;
             display: flex;
@@ -67,30 +112,7 @@
             justify-content: center;
             border: 2px dashed #ccc;
             color: #999;
-            font-size: 12px;
-        }
-        .partido-container {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .partido-logo {
-            width: 40px;  /* Aumentado de 24px */
-            height: 40px; /* Aumentado de 24px */
-            object-fit: contain;
-        }
-        .gabinete-info .partido-logo {
-            width: 30px;  /* Aumentado de 16px */
-            height: 30px; /* Aumentado de 16px */
-        }
-        .vereador-card {
-            padding: 15px; /* Aumentado o padding */
-            gap: 20px;    /* Aumentado o espaçamento */
-            height: 120px; /* Aumentado a altura */
-        }
-        .vereador-foto {
-            width: 90px;  /* Aumentado de 80px */
-            height: 90px; /* Aumentado de 80px */
+            font-size: 10px;
         }
     </style>
 </head>
@@ -124,26 +146,13 @@
                                     </div>
                                     
                                     @if(isset($vereador->partido->nome) && $vereador->partido->nome != 'Sem partido')
-                                    <div class="partido-container">
-                                        @if(isset($vereador->partido->logo))
-                                            <img src="{{ asset('storage/' . $vereador->partido->logo) }}" 
-                                                 alt="{{ $vereador->partido->nome }}" 
-                                                 class="partido-logo"
-                                                 onerror="this.style.display='none'">
-                                        @endif
-                                        <span>{{ $vereador->partido->nome }}</span>
+                                    <div class="partido-info">
+                                        Partido: {{ $vereador->partido->nome }}
                                     </div>
                                     @endif
                                 </div>
                                 
                                 <div class="gabinete-info">
-                                    @if(isset($vereador->partido->logo) && $vereador->nome_politico != 'VAGO')
-                                        <img src="{{ asset('storage/' . $vereador->partido->logo) }}" 
-                                             alt="{{ $vereador->partido->nome }}" 
-                                             class="partido-logo"
-                                             style="width: 20px; height: 20px;"
-                                             onerror="this.style.display='none'">
-                                    @endif
                                     <span>GAB. {{ $vereador->sala }}</span>
                                 </div>
                             </div>
