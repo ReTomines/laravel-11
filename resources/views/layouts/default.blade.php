@@ -16,6 +16,7 @@
       name="keywords"
       content="bootstrap 5, bootstrap, bootstrap 5 admin dashboard, bootstrap 5 dashboard, bootstrap 5 charts, bootstrap 5 calendar, bootstrap 5 datepicker, bootstrap 5 tables, bootstrap 5 datatable, vanilla js datatable, colorlibhq, colorlibhq dashboard, colorlibhq admin dashboard"
     />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @vite('resources/scss/app.scss')
   </head>
   <!--end::Head-->
@@ -51,6 +52,7 @@
       
     </div>
   @vite('resources/js/app.js')  
+  @stack('scripts')
   </body>
   <!--end::Body-->
 </html>
