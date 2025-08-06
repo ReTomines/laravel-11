@@ -1,166 +1,160 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slides de Vereadores</title>
     <style>
-        /* Estilos atualizados */
-        .slide {
-            margin-bottom: 30px;
-            border: 1px solid #e0e0e0;
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
             padding: 15px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px; 
+            margin: 0 auto;
+        }
+        
+        .slide {
+            background-color: white;
             border-radius: 8px;
-            background-color: #f9f9f9;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 5px;
+            margin-bottom: 10px;
         }
         
         .header {
+            width: 100%;
             text-align: center;
-            background-color: #333;
-            color: white;
-            padding: 12px;
-            margin-bottom: 15px;
-            border-radius: 5px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e1e1e1;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            margin: 0;
             font-size: 18px;
         }
         
-        .slide-content {
-            display: flex;
-            gap: 20px;
-        }
-        
-        .pavimento-column {
-            flex: 1;
-        }
-        
-        .localizacao-title {
-            font-weight: bold;
-            margin-bottom: 10px;
-            font-size: 16px;
-            color: #666; /* Tom de cinza médio para títulos de pavimento */
-            padding: 5px;
-            background-color: #f0f0f0; /* Fundo cinza claro */
+        .location-title {
+            background-color:rgba(88, 100, 107, 0.47);
+            color: white;
+            padding: 2px 5px;
             border-radius: 4px;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 18px;
         }
         
-        .vereador-card {
-            border: 1px solid #e0e0e0;
-            border-radius: 5px;
-            padding: 10px;
+        .councilor-card {
+            border: 1px solid #e1e1e1;
+            border-radius: 6px;
+            padding: 15px;
             margin-bottom: 10px;
+            background-color: #fff;
+        }
+        
+        .councilor-name-line {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 15px;
-            height: 80px; /* Altura reduzida */
-            position: relative;
-            background-color: white;
+            margin-bottom: 5px;
         }
         
-        .vereador-foto {
-            width: 60px; /* Reduzido */
-            height: 60px; /* Reduzido */
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #ddd;
-        }
-        
-        .vereador-info {
-            flex: 1;
+        .councilor-title-name {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            gap: 5px;
         }
         
-        .vereador-titulo {
-            font-weight: bold;
-            margin-bottom: 3px;
-            font-size: 12px;
-            color: #888; /* Tom de cinza para títulos */
+        .councilor-title {
+            color: #7f8c8d;
+            font-size: 16px;
             text-transform: uppercase;
         }
         
-        .vereador-nome {
-            font-size: 16px;
-            margin-bottom: 3px;
+        .councilor-name {
             font-weight: bold;
-            color: #333;
+            color: #2c3e50;
+            font-size: 16px;
         }
         
-        .partido-info {
-            font-size: 13px;
-            color: #555;
-            margin-top: 2px;
-        }
-        
-        .gabinete-info {
-            position: absolute;
-            right: 15px;
+        .councilor-party-office {
             display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 13px;
-            color: #777;
-            background-color: #f5f5f5;
-            padding: 3px 8px;
-            border-radius: 12px;
+            gap: 10px;
         }
         
-        .vago-placeholder {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: #eee;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px dashed #ccc;
-            color: #999;
-            font-size: 10px;
+        .councilor-party {
+            font-weight: bold;
+            color: #2980b9;
+        }
+        
+        .councilor-office {
+            color: #34495e;
+            font-size: 14px;
+        }
+        
+        .vago {
+            opacity: 0.7;
+            background-color: #f9f9f9;
+        }
+        
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+            
+            .slide {
+                page-break-after: always;
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
         }
     </style>
 </head>
 <body>
-    @foreach($vereadoresGrouped as $slideGroup)
-        <div class="slide">
-            <div class="header">EDIFÍCIO GENERAL EURICO GASPAR DUTRA (EDIFÍCIO ANEXO)</div>
-            
-            <div class="slide-content">
-                @foreach($slideGroup as $localizacao => $vereadores)
-                    <div class="pavimento-column">
-                        <div class="localizacao-title">{{ $localizacao }}</div>
+    <div class="container">
+        <div class="header"> <!-- cabeçalho -->
+            <h1>EDIFÍCIO GENERAL EURICO GASPAR DUTRA (EDIFÍCIO ANEXO)</h1>
+        </div>
+
+        @foreach($vereadoresGrouped as $group) <!-- loop para agrupar os vereadores por localização -->
+            <div class="slide"> <!-- conteúdo do slide -->
+
+                @foreach($group as $localizacao => $vereadores)<!-- loop para exibir os vereadores por localização -->
+                    <div class="location-title">{{ $localizacao }}</div> <!-- título da localização -->
                         
-                        @foreach($vereadores as $vereador)
-                            <div class="vereador-card">
-                                @if($vereador->nome_politico == 'VAGO')
-                                    <div class="vago-placeholder">
-                                        <span>VAGO</span>
-                                    </div>
-                                @else
-                                    <img src="{{ asset('storage/' . $vereador->foto_ver) }}" 
-                                         alt="{{ $vereador->nome_politico }}" 
-                                         class="vereador-foto"
-                                         onerror="this.src='{{ asset('images/default-avatar.png') }}'">
-                                @endif
+                        @foreach($vereadores as $vereador) <!-- loop para exibir os vereadores -->
+                            <div class="councilor-card {{ $vereador->nome_politico === 'VAGO' ? 'vago' : '' }}">
                                 
-                                <div class="vereador-info">
-                                    <div class="vereador-titulo">{{ strtoupper($vereador->titulo) }}</div>
-                                    <div class="vereador-nome">
-                                        {{ $vereador->nome_politico == 'VAGO' ? 'VAGO' : $vereador->nome_politico }}
+                                <div class="councilor-name-line">
+                                    <div class="">
+                                        <span class="councilor-title">{{ $vereador->titulo === 'vereador' ? 'VEREADOR' : 'VEREADORA' }}</span>
+                                        <span class="councilor-name">{{ $vereador->nome_politico }}</span>
                                     </div>
                                     
-                                    @if(isset($vereador->partido->nome) && $vereador->partido->nome != 'Sem partido')
-                                    <div class="partido-info">
-                                        Partido: {{ $vereador->partido->nome }}
+                                    <div class="">
+                                        <span class="councilor-party">
+                                            @if(isset($vereador->partido->nome_partido) && $vereador->partido->nome_partido !== 'Sem partido')
+                                                {{ $vereador->partido->nome_partido }}
+                                            @else
+                                                Sem partido
+                                            @endif
+                                        </span>
+                                        <span class="councilor-office">GAB. {{ $vereador->sala }}</span>
                                     </div>
-                                    @endif
                                 </div>
-                                
-                                <div class="gabinete-info">
-                                    <span>GAB. {{ $vereador->sala }}</span>
-                                </div>
+
                             </div>
+
                         @endforeach
-                    </div>
+
                 @endforeach
             </div>
-        </div>
-    @endforeach
+        @endforeach
+    </div>
 </body>
 </html>

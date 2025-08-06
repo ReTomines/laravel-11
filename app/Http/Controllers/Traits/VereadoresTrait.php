@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Traits;
 
-use App\Models\{Vereadores, Setores};
+use App\Models\{Vereadores, Setores, Partidos};
 
 trait VereadoresTrait
 {
